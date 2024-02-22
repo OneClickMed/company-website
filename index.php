@@ -580,6 +580,22 @@
 
     </section><!-- End Services Section -->
 
+  <!-- Backed up -->
+    <section id="backed-by" style="text-align: center;">
+
+        <div class="container" data-aos="fade-up">
+
+          <header class="section-header">
+          <h2>Backed up by</h2>
+            <p>We are currently backed up by</p>
+          </header>
+
+         <img src="assets/img/nitda.png" width="150px"> <img src="assets/img/fi.png" width="150px">
+
+    </section>
+   <!-- Backed up -->
+
+
     <!-- ======= Pricing Section ======= -->
     <!-- <section id="pricing" class="pricing">
 
