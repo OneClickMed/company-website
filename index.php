@@ -8,7 +8,7 @@
   <title>OneClick-Med</title>
   <meta
   property="og:description"
-  content="At OneClick-Med, we are redefining healthcare by centralizing patient registration and data through our One-Time Registration (OTR) and Electronic Medical Record (EMR) system. Enhancing inter-connectivity in the healthcare ecosystem, we ensure seamless access across the healthcare ecosystem for superior patient care."
+  content="Transforming healthcare through centralized patient registration and data management, OneClick-Med pioneers with our One-Time Registration (OTR) and Electronic Medical Record (EMR) system. Elevate your healthcare experience with enhanced inter-connectivity, ensuring effortless access for superior patient care across the entire ecosystem. Optimize your journey to wellness with OneClick-Med."
 />
 <meta property="og:url" content="https://oneclickmed.ng" />
 <meta property="og:site_name" content="Join OneClick-Med Waitlist" />

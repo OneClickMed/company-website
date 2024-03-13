@@ -27,8 +27,8 @@
         </a>
         <p>At OneClick-Med, we are redefining healthcare by centralizing patient registration and data through our One-Time Registration (OTR) and Electronic Medical Record (EMR) system. Enhancing inter-connectivity in the healthcare ecosystem, we ensure seamless access across the healthcare ecosystem for superior patient care.</p>
         <div class="social-links mt-3">
-          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com/oneclickmed_" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="https://facebook.com/oneclickmedng/" class="facebook"><i class="bi bi-facebook"></i></a>
           <a href="https://www.instagram.com/oneclick_med/" class="instagram"><i class="bi bi-instagram"></i></a>
           <a href="https://ng.linkedin.com/company/oneclick-med" class="linkedin"><i class="bi bi-linkedin"></i></a>
           <a href="https://www.youtube.com/@OneClick-Med" class="instagram"><i class="bi bi-youtube"></i></a>
