@@ -105,7 +105,7 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who we do</h3>
+              <h3>Who we are</h3>
               <h2>We connect your medical data to any Healthcare Institution you visit.</h2>
               <p>
                 At OneClick-Med, we are redefining healthcare by centralizing patient registration and data through our One-Time Registration (OTR) and Electronic Medical Record (EMR) system. Enhancing inter-connectivity in the healthcare ecosystem, we ensure seamless access across the healthcare ecosystem for superior patient care.
@@ -1150,7 +1150,31 @@
   </div>
   
 </div>
+
+
 </footer><!-- End Footer -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="waitlistModal" tabindex="-1" aria-labelledby="waitlistModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="waitlistModalLabel">Join our Waitlist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>We are excited to have you onboard. Join our waitlist for an opportunity to use our product for FREE when we launch.</p>
+      </div>
+      <div class="modal-footer d-grid justify-content-center">
+        <!-- Change the href attribute to your desired URL -->
+        <a href="https://277hfb0ua0w.typeform.com/to/izegW8S1" target="_blank" class="btn btn-custom">Join our waitlist</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -1169,8 +1193,26 @@
 
 <script src="//code.jivosite.com/widget/zatxJDXlKB" async></script>
 
-
+<script>
+  // Trigger the modal on page load
+  var myModal = new bootstrap.Modal(document.getElementById('waitlistModal'), {
+    keyboard: false
+  });
+  myModal.show();
+</script>
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

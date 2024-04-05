@@ -14,10 +14,29 @@
 }
 
 
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
+
+
+/* modal */
+.modal-content {
+  background-color: #f8f9fa;
+  color: #000;
+}
+.modal-header {
+  border-bottom: none;
+}
+.modal-footer {
+  border-top: none;
+}
+.btn-custom {
+  background-color: #42BAE4;
+  color: #fff;
+}
+/*  */
 
 a {
   color: #42BAE4;
