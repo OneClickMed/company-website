@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.orbit-container {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 80%;
+  padding-bottom: 70%;
+  padding-top: 10%;
+
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  border-radius: 50%;
+  position: absolute;
+  border-style: solid;
+  border: 0.05px solid #FDBE01 ;
+  /*#cde9ef*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
+}
+
+.circle1 {
+  width: 100%;
+  height: 100%;
+  animation: rotate1 10s linear infinite;
+}
+
+.circle2 {
+  width: 80%;
+  height: 80%;
+  animation: rotate2 15s linear infinite;
+}
+
+.circle3 {
+  width: 60%;
+  height: 60%;
+  animation: rotate3 20s linear infinite;
+}
+
+.circle4 {
+  width: 40%;
+  height: 40%;
+  animation: rotate4 25s linear infinite;
+}
+
+.item {
+  width: 9%;
+  height: 9%;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle1 .item1,
+.circle2 .item1,
+.circle3 .item1,
+.circle4 .item1 {
+  top: -3%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.circle1 .item2,
+.circle2 .item2,
+.circle3 .item2,
+.circle4 .item2 {
+  bottom: -3%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes rotate1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate2 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate3 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate4 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 30ch; } /* Adjust the value of ch based on the length of the text */
+}
+
+@keyframes blinkTextCursor {
+  from { border-right-color: rgba(0, 0, 0, .75); }
+  to { border-right-color: transparent; }
+}
+
+.typewriter {
+  display: inline-block;
+  padding-right: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 
+    typewriter 4s steps(15, end) 3s infinite normal both, /* Adjust the steps value to match the character count */
+    blinkTextCursor .75s step-end infinite;
+}
+.typewriter::before {
+  content: '→ '; /* Adjust the arrow style as needed */
+
+  color: rgba(0, 0, 0, .75); /* Same color as cursor */
+}
+
+.background-gradient {
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 6%, rgba(66,186,228,0.11110381652661061) 69%, rgba(255,255,255,1) 95%);
+}
