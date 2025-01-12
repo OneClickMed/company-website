@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Quill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Quill styles
-import 'tailwindcss/tailwind.css'; // Tailwind styles
-import { filterOptions, createArticle } from '../utils-firebase'; // Adjust the import as per your file structure
+import 'react-quill/dist/quill.snow.css';
+import 'tailwindcss/tailwind.css';
+import { filterOptions, createArticle } from '../utils-firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import { Timestamp } from "firebase/firestore"; // Import Timestamp directly if needed
+import { Timestamp } from "firebase/firestore";
 import toast, { Toaster } from 'react-hot-toast';
 
 const WriteArticle = () => {
@@ -17,6 +17,7 @@ const WriteArticle = () => {
     content: '',
     createdAt: '',
     publish: false,
+    featured: false,
     categories: [],
     meta_description: '',
     meta_keywords: ''
@@ -25,10 +26,9 @@ const WriteArticle = () => {
 
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for submit button
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
-
     const newErrors = {};
     if (!article.author) newErrors.author = 'Author is required';
     if (!article.createdAt) newErrors.author = 'Date is required';
@@ -44,17 +44,11 @@ const WriteArticle = () => {
 
     if (!valid) {
       toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}
-        >
+        <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}>
           <div className="flex-1 w-0 p-4">
             <div className="flex items-start">
               <div className="ml-3 flex-1">
-                <p className="text-sm text-red-700">
-                  Missing Fields
-                </p>
+                <p className="text-sm text-red-700">Missing Fields</p>
               </div>
             </div>
           </div>
@@ -67,17 +61,16 @@ const WriteArticle = () => {
             </button>
           </div>
         </div>
-      ))
+      ));
     }
 
-    return valid
+    return valid;
   };
 
   const handleChange = (field) => (event) => {
-    
     if (field === 'image') {
       setArticle({ ...article, image: event.target.files[0] });
-    } else if (field === 'publish') {
+    } else if (field === 'publish' || field === 'featured') {
       setArticle({ ...article, [field]: event.target.value === 'true' });
     } else {
       setArticle({ ...article, [field]: event.target.value });
@@ -106,7 +99,7 @@ const WriteArticle = () => {
     event.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true); // Disable the button and show loading state
+    setIsSubmitting(true);
 
     const formData = new FormData();
     for (const key in article) {
@@ -121,7 +114,6 @@ const WriteArticle = () => {
 
     if (!article.createdAt) {
       formData.append('createdAt', Timestamp.now());
-
     } else {
       formData.append('createdAt', article.createdAt);
     }
@@ -138,6 +130,7 @@ const WriteArticle = () => {
         content: '',
         createdAt: '',
         publish: false,
+        featured: false,
         categories: [],
         meta_description: '',
         meta_keywords: ''
@@ -146,7 +139,7 @@ const WriteArticle = () => {
     } catch (error) {
       console.error('Error creating article:', error);
     } finally {
-      setIsSubmitting(false); // Re-enable the button
+      setIsSubmitting(false);
     }
   };
 
@@ -156,17 +149,17 @@ const WriteArticle = () => {
 
   return (
     <div className="space-y-6 p-6 bg-white max-w-7xl mx-auto">
-            <Toaster
+      <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{
           style: {
-            position:'absolute !important'
+            position: 'absolute !important'
           },
- }}
+        }}
       />
       <div className='text-left'>
-        <Link to="/" className="text-ocmblue mb-4 text-left ml-3 ">&larr; Back to Admin Page</Link>
+        <Link to="/" className="text-ocmblue mb-4 text-left ml-3">&larr; Back to Admin Page</Link>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 bg-white max-w-7xl mx-auto">
@@ -215,25 +208,51 @@ const WriteArticle = () => {
           <h4 className="text-lg font-semibold mb-2 text-left">
             Body (Short Form preview content used in the patient app)
           </h4>
-        <textarea
-          value={article.body}
-          onChange={handleChange('body')}
+          <textarea
+            value={article.body}
+            onChange={handleChange('body')}
             placeholder="Body"
-            rows="8" // Specifies the height of the textarea in terms of number of lines
+            rows="8"
             className={`w-full p-3 border ${errors.body ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
           />
           {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
         </div>
 
-        <h4 className="text-lg font-semibold text-left">Publish Date</h4>
-        <input
-          type="date"
-          value={article.createdAt}
-        
-          onChange={handleChange('createdAt')}
-          className={`w-full p-3 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="w-full">
+            <h4 className="text-lg font-semibold mb-2 text-left">Publish Status</h4>
+            <select
+              value={article.publish.toString()}
+              onChange={handleChange('publish')}
+              className="w-full p-3 border border-gray-300 rounded outline-none"
+            >
+              <option value="false">Draft</option>
+              <option value="true">Published</option>
+            </select>
+          </div>
 
-        />
+          <div className="w-full">
+            <h4 className="text-lg font-semibold mb-2 text-left">Featured Post</h4>
+            <select
+              value={article.featured.toString()}
+              onChange={handleChange('featured')}
+              className="w-full p-3 border border-gray-300 rounded outline-none"
+            >
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="w-full">
+          <h4 className="text-lg font-semibold text-left">Publish Date</h4>
+          <input
+            type="date"
+            value={article.createdAt}
+            onChange={handleChange('createdAt')}
+            className={`w-full p-3 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
+          />
+        </div>
 
         <div className="w-full">
           <h4 className="text-lg font-semibold mb-2 text-left">Categories</h4>
@@ -294,11 +313,11 @@ const WriteArticle = () => {
         <button
           type="submit"
           className="w-full px-4 py-3 bg-ocmblue text-white rounded hover:bg-ocmyellow"
-          disabled={isSubmitting} // Disable button when submitting
+          disabled={isSubmitting}
         >
-          {isSubmitting ? 'Creating Article...' : 'Create Article'} {/* Change button text based on submitting state */}
+          {isSubmitting ? 'Creating Article...' : 'Create Article'}
         </button>
-        {status && <p> {status} </p>}
+        {status && <p>{status}</p>}
       </form>
     </div>
   );

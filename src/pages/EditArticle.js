@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link} from 'react-router-dom';
+import { useParams, Link,useNavigate} from 'react-router-dom';
+
 import Quill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Quill styles
-import 'tailwindcss/tailwind.css'; // Tailwind styles
-import { getArticleBySlug, filterOptions, editArticle } from '../utils-firebase'; // Import necessary functions and data
+import 'react-quill/dist/quill.snow.css';
+import 'tailwindcss/tailwind.css';
+import { getArticleBySlug, filterOptions, editArticle } from '../utils-firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
 const EditArticle = () => {
   const { slug } = useParams();
-  
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(true); // Add loading state
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for submit button
+  const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [article, setArticle] = useState({
     author: '',
@@ -24,11 +24,11 @@ const EditArticle = () => {
     content: '',
     createdAt: '',
     publish: false,
+    featured: false,
     categories: [],
     meta_description: '',
-    meta_keywords: ''
+    meta_keywords: '',
   });
-
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -40,20 +40,18 @@ const EditArticle = () => {
 
             const timestamp = fetchedArticle.createdAt;
 
-            // Check if createdAt exists and is a valid Timestamp object
             if (timestamp && typeof timestamp.seconds === 'number' && typeof timestamp.nanoseconds === 'number') {
               const date = new Date(timestamp.seconds * 1000);
               const formattedDate = date.toISOString().split('T')[0];
-              formattedArticle.createdAt = formattedDate;  // Update the createdAt field with formatted date
+              formattedArticle.createdAt = formattedDate;
             } else {
-              // Handle the case where createdAt is not a valid Timestamp
               console.warn('createdAt is not a valid Timestamp:', timestamp);
             }
 
-            // Set the article state with all the fields from fetchedArticle
-            setArticle(formattedArticle);
+            formattedArticle.publish = Boolean(fetchedArticle.publish);
+            formattedArticle.featured = Boolean(fetchedArticle.featured);
 
-            // Set the image preview with the cover image URL
+            setArticle(formattedArticle);
             setImagePreview(fetchedArticle.coverImage);
           } else {
             console.log(`Article with slug '${slug}' not found.`);
@@ -61,12 +59,10 @@ const EditArticle = () => {
         } catch (error) {
           console.error('Error fetching article:', error);
         } finally {
-          setLoading(false); // Set loading to false once data is fetched
+          setLoading(false);
         }
       }
     };
-    
-
 
     fetchArticle();
   }, [slug]);
@@ -84,33 +80,23 @@ const EditArticle = () => {
     const valid = Object.keys(newErrors).length === 0;
     if (!valid) {
       toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}
-        >
+        <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}>
           <div className="flex-1 w-0 p-4">
             <div className="flex items-start">
               <div className="ml-3 flex-1">
-                <p className="text-sm text-red-700">
-                  Missing Fields
-                </p>
+                <p className="text-sm text-red-700">Missing Fields</p>
               </div>
             </div>
           </div>
           <div className="flex border-l border-red-200">
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-            >
+            <button onClick={() => toast.dismiss(t.id)} className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500">
               Close
             </button>
           </div>
         </div>
-      ))
+      ));
     }
-
-    return valid
+    return valid;
   };
 
   const handleChange = (field) => (event) => {
@@ -118,6 +104,9 @@ const EditArticle = () => {
       const file = event.target.files[0];
       setArticle({ ...article, image_file: file });
       setImagePreview(URL.createObjectURL(file));
+    } else if (field === 'publish' || field === 'featured') {
+      const value = event.target.value === 'true';
+      setArticle({ ...article, [field]: value });
     } else {
       setArticle({ ...article, [field]: event.target.value });
     }
@@ -145,7 +134,7 @@ const EditArticle = () => {
     event.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
     const formData = new FormData();
     for (const key in article) {
       if (key === 'image_file' && article[key]) {
@@ -166,72 +155,46 @@ const EditArticle = () => {
     try {
       const articleId = article.id;
       await editArticle(articleId, formData, article.coverImage, article.image_file_name);
-      // Show success toast
       toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } max-w-md w-full bg-green-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-green-400 ring-opacity-5`}
-        >
+        <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-green-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-green-400 ring-opacity-5`}>
           <div className="flex-1 w-0 p-4">
             <div className="flex items-start">
               <div className="ml-3 flex-1">
-                <p className=" text-sm text-green-700">
-                  Your action was completed successfully!
-                </p>
+                <p className="text-sm text-green-700">Your action was completed successfully!</p>
               </div>
             </div>
           </div>
           <div className="flex border-l border-green-200">
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
+            <button onClick={() => toast.dismiss(t.id)} className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
               Close
             </button>
           </div>
         </div>
-      ))
-      
-
-      
+      ));
     } catch (error) {
       toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}
-        >
+        <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-red-50 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-red-400 ring-opacity-5`}>
           <div className="flex-1 w-0 p-4">
             <div className="flex items-start">
               <div className="ml-3 flex-1">
-                <p className="text-sm text-red-700">
-                  Something went wrong! Please try again.
-                </p>
+                <p className="text-sm text-red-700">Something went wrong! Please try again.</p>
               </div>
             </div>
           </div>
           <div className="flex border-l border-red-200">
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-            >
+            <button onClick={() => toast.dismiss(t.id)} className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500">
               Close
             </button>
           </div>
         </div>
-      ))
-      
-
+      ));
     } finally {
-      setIsSubmitting(false); // Re-enable the button
+      setIsSubmitting(false);
     }
   };
 
   const availableCategories = filterOptions 
-    ? filterOptions.filter(
-        (option) => !(article?.categories?.includes(option.value))
-      ) 
+    ? filterOptions.filter((option) => !(article?.categories?.includes(option.value))) 
     : [];
 
   if (loading) {
@@ -258,17 +221,14 @@ const EditArticle = () => {
 
   return (
     <div className="space-y-6 p-6 bg-white max-w-7xl mx-auto relative">
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        toastOptions={{
-          style: {
-            position:'absolute !important'
-          },
- }}
-      />
+      <Toaster position="top-right" reverseOrder={false} toastOptions={{ style: { position: 'absolute !important' }}} />
       <div className='text-left'>
-        <Link to="/" className="text-ocmblue mb-4 text-left ml-3 ">&larr; Back to Admin Page</Link>
+      <button 
+        onClick={() => navigate(-1)} 
+        className="text-ocmblue mb-4 text-left ml-3"
+      >
+        &larr; Back to Admin Page
+      </button>
       </div>
       <form onSubmit={handleSubmit} className="space-y-6 bg-white max-w-7xl mx-auto">
         <input
@@ -296,6 +256,7 @@ const EditArticle = () => {
           placeholder="Subtitle (optional)"
           className="w-full p-3 border border-gray-300 rounded outline-none"
         />
+
         <div>
           <input
             type="file"
@@ -303,7 +264,7 @@ const EditArticle = () => {
             className={`w-full p-3 border ${errors.image_file ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
           />
           {imagePreview && (
-            <div className="mt-2 ">
+            <div className="mt-2">
               <p className='text-left mb-2 text-sm text-gray-500'>Current Image. (choose a new image to update image)</p>
               <img src={imagePreview} alt="Article preview" className="w-24 h-auto" />
             </div>
@@ -320,9 +281,7 @@ const EditArticle = () => {
         {errors.content && <p className="text-red-500 text-sm">{errors.content}</p>}
 
         <div className='w-full'>
-          <h4 className="text-lg font-semibold mb-2 text-left">
-            Body (Short Form preview content used in the patient app)
-          </h4>
+          <h4 className="text-lg font-semibold mb-2 text-left">Body (Short Form preview content used in the patient app)</h4>
           <textarea
             value={article.body}
             onChange={handleChange('body')}
@@ -333,14 +292,16 @@ const EditArticle = () => {
           {errors.body && <p className="text-red-500 text-sm">{errors.body}</p>}
         </div>
 
-        <h4 className="text-lg font-semibold text-left">Publish Date</h4>
-        <input
-          type="date"
-          value={article.createdAt}
-          required
-          onChange={handleChange('createdAt')}
-          className="w-full p-3 border border-gray-300 rounded outline-none"
-        />
+        <div className="w-full">
+          <h4 className="text-lg font-semibold text-left">Publish Date</h4>
+          <input
+            type="date"
+            value={article.createdAt}
+            required
+            onChange={handleChange('createdAt')}
+            className="w-full p-3 border border-gray-300 rounded outline-none"
+          />
+        </div>
 
         <div className="w-full">
           <h4 className="text-lg font-semibold mb-2 text-left">Categories</h4>
@@ -358,15 +319,9 @@ const EditArticle = () => {
           </div>
           <div className="flex flex-wrap gap-2">
             {article?.categories?.map((category) => (
-              <div
-                key={category}
-                className="flex items-center space-x-2 bg-blue-100 p-2 rounded">
+              <div key={category} className="flex items-center space-x-2 bg-blue-100 p-2 rounded">
                 <span>{filterOptions.find((option) => option.value === category)?.label}</span>
-                <button
-                  type="button"
-                  onClick={() => handleCategoryRemove(category)}
-                  className="text-red-500"
-                >
+                <button type="button" onClick={() => handleCategoryRemove(category)} className="text-red-500">
                   &times;
                 </button>
               </div>
@@ -374,56 +329,69 @@ const EditArticle = () => {
           </div>
         </div>
 
-        <div className="w-full">
-          <h4 className="text-lg font-semibold mb-2 text-left">Status</h4>
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center">
+        <div className="w-full space-y-4">
+          <h4 className="text-lg font-semibold mb-2 text-left">Article Settings</h4>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Publication Status</label>
               <select
-                value={article.publish}
+                value={article.publish.toString()}
                 onChange={handleChange('publish')}
                 className="w-full p-3 border border-gray-300 rounded outline-none"
               >
-                <option value={false}>Draft</option>
-                <option value={true}>Publish</option>
+                <option value="false">Draft</option>
+                <option value="true">Published</option>
               </select>
-            </label>
-          </div>
-        </div>
+            </div>
 
-        <div className='w-full'>
-          <h4 className="text-lg font-semibold mb-2 text-left">Meta Description</h4>
-          <input
-            type="text"
-            value={article.meta_description || article.description}
-            onChange={handleChange('meta_description')}
-            placeholder="Meta Description"
-            className={`w-full p-3 border ${errors.meta_description ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
-          />
-          {errors.meta_description && <p className="text-red-500 text-sm">{errors.meta_description}</p>}
-        </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Featured Article</label>
+              <select
+value={article.featured.toString()}
+onChange={handleChange('featured')}
+className="w-full p-3 border border-gray-300 rounded outline-none"
+>
+<option value="false">Not Featured</option>
+<option value="true">Featured</option>
+</select>
+</div>
+</div>
+</div>
 
-        <div className='w-full'>
-          <h4 className="text-lg font-semibold mb-2 text-left">Keywords</h4>
-          <input
-            type="text"
-            value={article.meta_keywords}
-            onChange={handleChange('meta_keywords')}
-            placeholder="Comma Separated list of keywords from the article"
-            className={`w-full p-3 border ${errors.meta_keywords ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
-          />
-          {errors.meta_keywords && <p className="text-red-500 text-sm">{errors.meta_keywords}</p>}
-        </div>
+<div className='w-full'>
+<h4 className="text-lg font-semibold mb-2 text-left">Meta Description</h4>
+<input
+type="text"
+value={article.meta_description || article.description}
+onChange={handleChange('meta_description')}
+placeholder="Meta Description"
+className={`w-full p-3 border ${errors.meta_description ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
+/>
+{errors.meta_description && <p className="text-red-500 text-sm">{errors.meta_description}</p>}
+</div>
 
-        <button
-          type="submit"
-          className="w-full px-4 py-3 bg-ocmblue text-white rounded hover:bg-ocmyellow"
-          disabled={isSubmitting} // Disable button when submitting
-        >
-          {isSubmitting ? 'Confirm Edit...' : 'Confirm Edit'} {/* Change button text based on submitting state */}
-        </button>
-      </form>
-    </div>
-  );
+<div className='w-full'>
+<h4 className="text-lg font-semibold mb-2 text-left">Keywords</h4>
+<input
+type="text"
+value={article.meta_keywords}
+onChange={handleChange('meta_keywords')}
+placeholder="Comma Separated list of keywords from the article"
+className={`w-full p-3 border ${errors.meta_keywords ? 'border-red-500' : 'border-gray-300'} rounded outline-none`}
+/>
+{errors.meta_keywords && <p className="text-red-500 text-sm">{errors.meta_keywords}</p>}
+</div>
+
+<button
+type="submit"
+className="w-full px-4 py-3 bg-ocmblue text-white rounded hover:bg-ocmyellow"
+disabled={isSubmitting}
+>
+{isSubmitting ? 'Confirm Edit...' : 'Confirm Edit'}
+</button>
+</form>
+</div>
+);
 };
 
 export default EditArticle;

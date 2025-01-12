@@ -11,7 +11,7 @@ const truncateText = (text, maxLength) => {
 };
 const BlogCard = ({ article,maxTitleLength=null }) => {
   return (
-    <div className="mx-auto bg-white rounded-xl shadow-sm overflow-hidden  m-5 text-left cursor-pointer">
+    <div className="mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden  m-5 text-left cursor-pointer">
       <img className="h-48 w-full object-cover" src={article.coverImage} alt={article.title} />
       <div className="p-6">
         <div className="uppercase tracking-wide text-md text-ocmbluedark font-semibold">
