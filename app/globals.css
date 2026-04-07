@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Operatta 8';
+  src: url('/Operetta%20Medium/fonnts.com-operetta8-demibolditalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-operatta-8: 'Operatta 8', Georgia, serif;
+  --font-avenir: 'Avenir', 'Avenir Next', Helvetica, Arial, sans-serif;
+  --navy-blue: #0124AA;
+  --navy-blue-rgb: 1 36 170;
+  --cobalt: #0A50E1;
+  --cobalt-rgb: 10 80 225;
+  --coral: #FF7F50;
+  --coral-rgb: 255 127 80;
+  --ice-blue: #D8EFFC;
+  --ice-blue-rgb: 216 239 252;
+  --beige: #FFEAC9;
+  --beige-rgb: 255 234 201;
+  --white: #FFFFFF;
+  --white-rgb: 255 255 255;
+  --salmon-red: #E55C38;
+  --salmon-red-rgb: 229 92 56;
+  --light-yellow: #FFF6A5;
+  --light-yellow-rgb: 255 246 165;
+  --lavender: #A888F9;
+  --lavender-rgb: 168 136 249;
+  --blush-pink: #F5C9CA;
+  --blush-pink-rgb: 245 201 202;
+  --black: #000000;
+  --black-rgb: 0 0 0;
+  --blue: var(--navy-blue);
+  --orange: var(--salmon-red);
+  --dark: var(--black);
+  --light: var(--ice-blue);
+  --iceblue: var(--ice-blue);
+  --gray: rgb(0 0 0 / 60%);
+  --light-blue: var(--ice-blue);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-avenir);
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+b {
+  font-family: var(--font-operatta-8);
+  font-style: italic;
+  letter-spacing: 0.015em;
+}
+
+@layer utilities {
+  .font-head {
+    font-family: var(--font-avenir);
+  }
+  .font-body {
+    font-family: var(--font-avenir);
+  }
+  .font-accent {
+    font-family: var(--font-operatta-8);
+    font-style: italic;
+    letter-spacing: 0.015em;
+  }
+}
+
+/* Carousel scrollbar hide */
+.carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}

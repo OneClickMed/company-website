@@ -1,0 +1,25 @@
+export default function About() {
+  return (
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-salmon-red px-4 py-20 md:px-0">
+      <div className="relative mx-auto min-h-[600px] w-full max-w-[1120px]">
+        <div className="relative z-10 flex min-h-[600px] max-w-[520px] flex-col justify-center">
+          <p className="mb-4 font-body text-[15px] font-medium uppercase tracking-[0.04em] text-white">
+            Who We Are
+          </p>
+          <h2 className="font-body text-[clamp(36px,4vw,44px)] font-normal leading-[1.08] text-white">
+            We Connect your Medical Data to any Healthcare Institution you visit.
+          </h2>
+          <p className="mt-5 max-w-[560px] font-body text-[15px] leading-[1.55] text-white">
+            At OneClickMed, we simplify healthcare with an AI-powered platform that centralizes patient registration, data, and diagnosis. Providers get real-time, accurate insights, reducing errors, delays, and costs while delivering faster, smarter care.
+          </p>
+        </div>
+
+        <img
+          src="https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/about-1024x1018.png"
+          alt="About OneClickMed"
+          className="mt-10 h-[420px] w-full rounded-[10px] rounded-bl-[180px] object-cover object-center md:absolute md:right-0 md:top-10 md:mt-0 md:h-[525px] md:w-[48%] md:rounded-bl-[230px]"
+        />
+      </div>
+    </section>
+  )
+}
