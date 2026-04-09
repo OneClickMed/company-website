@@ -9,7 +9,7 @@ const backers = [
 export default function Backers() {
   return (
     <section className="px-6 py-[60px] md:px-10">
-      <div className="max-w-[1200px] mx-auto text-center">
+      <div className="mx-auto max-w-content text-center">
         <p className="font-body text-sm font-semibold text-black/60 tracking-[0.1em] uppercase mb-8">
           We are backed by
         </p>

@@ -79,7 +79,7 @@ export default function BlogList() {
 
   return (
     <main className="min-h-screen bg-white px-4 py-16 md:px-10">
-      <div className="mx-auto max-w-[1200px]">
+      <div className="mx-auto max-w-content">
         <div className="mb-10 text-center">
           <p className="mb-3 font-body text-[13px] font-bold uppercase tracking-[0.12em] text-salmon-red">
             Resources

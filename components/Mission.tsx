@@ -42,40 +42,42 @@ function MissionPanel({ item }: { item: (typeof missionItems)[number] }) {
 
 export default function Mission() {
   return (
-    <section className="mx-auto  px-4 py-16">
-      <h2 className="mb-12 text-center font-body text-[clamp(32px,4vw,44px)] font-medium leading-none text-black">
-        Our <b className="font-accent">Mission</b>
-      </h2>
+    <section className="px-4 py-16 md:px-10">
+      <div className="mx-auto max-w-content">
+        <h2 className="mb-12 text-center font-body text-[clamp(32px,4vw,44px)] font-medium leading-none text-black">
+          Our <b className="font-accent">Mission</b>
+        </h2>
 
-      <div className="grid overflow-hidden rounded-[4px] bg-white shadow-sm">
-        <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[30%_70%]">
-          <img
-            src={missionImages.interoperability}
-            alt="Interoperability"
-            className="order-2 h-[280px] w-full rounded-tl-[150px] object-cover object-center md:order-1 md:h-[255px]"
-          />
-          <div className="order-1 md:order-2">
-            <MissionPanel item={missionItems[0]} />
+        <div className="grid overflow-hidden rounded-[4px] bg-white shadow-sm">
+          <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[30%_70%]">
+            <img
+              src={missionImages.interoperability}
+              alt="Interoperability"
+              className="order-2 h-[280px] w-full rounded-tl-[150px] object-cover object-center md:order-1 md:h-[255px]"
+            />
+            <div className="order-1 md:order-2">
+              <MissionPanel item={missionItems[0]} />
+            </div>
           </div>
-        </div>
 
-        <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[70%_30%]">
-          <MissionPanel item={missionItems[1]} />
-          <img
-            src={missionImages.optimize}
-            alt="Optimize"
-            className="h-[280px] w-full rounded-tl-[150px] object-cover object-center md:h-[255px]"
-          />
-        </div>
+          <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[70%_30%]">
+            <MissionPanel item={missionItems[1]} />
+            <img
+              src={missionImages.optimize}
+              alt="Optimize"
+              className="h-[280px] w-full rounded-tl-[150px] object-cover object-center md:h-[255px]"
+            />
+          </div>
 
-        <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[30%_70%]">
-          <img
-            src={missionImages.empower}
-            alt="Empower"
-            className="order-2 h-[280px] w-full rounded-tl-[150px] object-cover object-center md:order-1 md:h-[255px]"
-          />
-          <div className="order-1 md:order-2">
-            <MissionPanel item={missionItems[2]} />
+          <div className="grid h-[560px] grid-cols-1 md:h-[255px] md:grid-cols-[30%_70%]">
+            <img
+              src={missionImages.empower}
+              alt="Empower"
+              className="order-2 h-[280px] w-full rounded-tl-[150px] object-cover object-center md:order-1 md:h-[255px]"
+            />
+            <div className="order-1 md:order-2">
+              <MissionPanel item={missionItems[2]} />
+            </div>
           </div>
         </div>
       </div>

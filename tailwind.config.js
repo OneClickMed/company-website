@@ -62,7 +62,7 @@ module.exports = {
         'brand-menu': '0 8px 32px rgb(var(--navy-blue-rgb) / 0.12)',
       },
       maxWidth: {
-        content: '1200px',
+        content: '1600px',
       },
     },
   },

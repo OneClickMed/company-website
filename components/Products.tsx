@@ -141,61 +141,63 @@ export default function Products() {
   )
 
   return (
-    <section className=" mx-auto px-5 py-20">
-      <h2 className="mx-auto max-w-[760px] text-center font-body text-[clamp(34px,4vw,52px)] font-medium leading-[1.05] text-black">
-        AI-powered tools for <b className="font-accent">smarter</b>, connected healthcare operations.
-      </h2>
+    <section className="px-5 py-20 md:px-10">
+      <div className="mx-auto max-w-content">
+        <h2 className="mx-auto max-w-[760px] text-center font-body text-[clamp(34px,4vw,52px)] font-medium leading-[1.05] text-black">
+          AI-powered tools for <b className="font-accent">smarter</b>, connected healthcare operations.
+        </h2>
 
-      <div className="mx-auto mt-9 mb-10 grid w-fit grid-cols-2 overflow-hidden rounded-full border border-navy bg-white p-0">
-        {(['digital', 'beta'] as const).map((tab) => {
-          const isActive = activeTab === tab
-          const activeBg = tab === 'digital' ? 'bg-light-yellow' : 'bg-blush-pink'
-          return (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`min-w-[200px] rounded-full px-8 py-4 font-body text-base font-semibold transition-all ${
-                isActive ? `${activeBg} text-navy` : 'bg-white text-black hover:bg-ice-blue'
-              }`}
-            >
-              {tab === 'digital' ? 'Digital Health' : 'Beta Health'}
-            </button>
-          )
-        })}
-      </div>
+        <div className="mx-auto mb-10 mt-9 grid w-fit grid-cols-2 overflow-hidden rounded-full border border-navy bg-white p-0">
+          {(['digital', 'beta'] as const).map((tab) => {
+            const isActive = activeTab === tab
+            const activeBg = tab === 'digital' ? 'bg-light-yellow' : 'bg-blush-pink'
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`min-w-[200px] rounded-full px-8 py-4 font-body text-base font-semibold transition-all ${
+                  isActive ? `${activeBg} text-navy` : 'bg-white text-black hover:bg-ice-blue'
+                }`}
+              >
+                {tab === 'digital' ? 'Digital Health' : 'Beta Health'}
+              </button>
+            )
+          })}
+        </div>
 
-      <div className={`grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(260px,1fr)] ${activeTab === 'beta' ? 'lg:grid-cols-[minmax(260px,1fr)_minmax(0,3fr)]' : ''}`}>
-        {activeTab === 'beta' && sideCards}
+        <div className={`grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(260px,1fr)] ${activeTab === 'beta' ? 'lg:grid-cols-[minmax(260px,1fr)_minmax(0,3fr)]' : ''}`}>
+          {activeTab === 'beta' && sideCards}
 
-        <article className="relative min-h-[540px] overflow-hidden rounded-[16px] bg-navy p-10 text-white md:p-14">
-          <div className={`absolute rounded-full ${product.bubbleClass} ${product.bubblePosition}`} />
-          <div className={`relative z-10 ${product.contentClass}`}>
-            <p className="mb-5 text-[15px] font-extrabold uppercase tracking-[0.06em] text-light-yellow">
-              {product.eyebrow}
-            </p>
-            <div className="mb-5">
-              <img
-                src={product.logo}
-                alt={`${product.title} logo`}
-                className="h-auto max-h-12 w-auto max-w-[260px]"
-              />
+          <article className="relative min-h-[540px] overflow-hidden rounded-[16px] bg-navy p-10 text-white md:p-14">
+            <div className={`absolute rounded-full ${product.bubbleClass} ${product.bubblePosition}`} />
+            <div className={`relative z-10 ${product.contentClass}`}>
+              <p className="mb-5 text-[15px] font-extrabold uppercase tracking-[0.06em] text-light-yellow">
+                {product.eyebrow}
+              </p>
+              <div className="mb-5">
+                <img
+                  src={product.logo}
+                  alt={`${product.title} logo`}
+                  className="h-auto max-h-12 w-auto max-w-[260px]"
+                />
+              </div>
+              <p className="mb-8 text-base font-extrabold leading-[1.45] text-white">{product.subtitle}</p>
+              <p className="mb-9 text-[17px] leading-[1.55] text-white/85">{product.description}</p>
+              <ul className="flex flex-col gap-4 text-[17px] text-white">
+                {product.features.map((feature) => (
+                  <li key={feature.text} className="flex items-center gap-4">
+                    {feature.icon}
+                    <span>{feature.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <img src={product.image} alt={product.imageAlt} className={product.mobileImageClass} />
             </div>
-            <p className="mb-8 text-base font-extrabold leading-[1.45] text-white">{product.subtitle}</p>
-            <p className="mb-9 text-[17px] leading-[1.55] text-white/85">{product.description}</p>
-            <ul className="flex flex-col gap-4 text-[17px] text-white">
-              {product.features.map((feature) => (
-                <li key={feature.text} className="flex items-center gap-4">
-                  {feature.icon}
-                  <span>{feature.text}</span>
-                </li>
-              ))}
-            </ul>
-            <img src={product.image} alt={product.imageAlt} className={product.mobileImageClass} />
-          </div>
-          <img src={product.image} alt={product.imageAlt} className={product.imageClass} />
-        </article>
+            <img src={product.image} alt={product.imageAlt} className={product.imageClass} />
+          </article>
 
-        {activeTab === 'digital' && sideCards}
+          {activeTab === 'digital' && sideCards}
+        </div>
       </div>
     </section>
   )

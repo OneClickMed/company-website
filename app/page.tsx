@@ -4,6 +4,7 @@ import Stats from '@/components/Stats'
 import Backers from '@/components/Backers'
 import Products from '@/components/Products'
 import About from '@/components/About'
+import MeetTeam from '@/components/MeetTeam'
 import Mission from '@/components/Mission'
 import Services from '@/components/Services'
 import HowToStart from '@/components/HowToStart'
@@ -22,6 +23,7 @@ export default function Home() {
       <Products />
 
       <About />
+      <MeetTeam />
       <Mission />
 
       <Services />

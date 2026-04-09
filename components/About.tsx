@@ -1,7 +1,7 @@
 export default function About() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-salmon-red px-4 py-20 md:px-0">
-      <div className="relative mx-auto min-h-[600px] w-full max-w-[1120px]">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-salmon-red px-4 py-20 md:px-10">
+      <div className="relative mx-auto min-h-[600px] w-full max-w-content">
         <div className="relative z-10 flex min-h-[600px] max-w-[520px] flex-col justify-center">
           <p className="mb-4 font-body text-[15px] font-medium uppercase tracking-[0.04em] text-white">
             Who We Are

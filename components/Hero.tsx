@@ -16,7 +16,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="mx-auto flex max-w-[1200px] flex-col items-start px-6 py-24 text-left md:items-center md:px-10 md:py-32 md:text-center">
+    <section className="mx-auto flex max-w-content flex-col items-start px-6 py-24 text-left md:items-center md:px-10 md:py-32 md:text-center">
       <h1 className="font-body  text-[clamp(32px,5vw,72px)] font-extrabold leading-[1.05] max-w-[900px] text-navy">
         A Digital Health Platform That{' '}
         <b className="font-accent text-navy">Simplifies</b> Care

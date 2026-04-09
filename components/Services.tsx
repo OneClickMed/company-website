@@ -66,7 +66,7 @@ export default function Services() {
 
   return (
     <section className="bg-white px-6 py-20 md:px-10 md:py-24">
-      <div className="mx-auto ">
+      <div className="mx-auto max-w-content">
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div className="max-w-[860px]">
             <p className="font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black">

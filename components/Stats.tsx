@@ -37,7 +37,7 @@ const stats = [
 export default function Stats() {
   return (
     <section className="px-4 py-16 md:px-10">
-      <div className="group/stats mx-auto flex max-w-[1600px] flex-col gap-2 md:h-[520px] md:flex-row md:gap-0">
+      <div className="group/stats mx-auto flex max-w-content flex-col gap-2 md:h-[520px] md:flex-row md:gap-0">
         {stats.map((stat) => (
           <article
             key={stat.metric}

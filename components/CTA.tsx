@@ -3,7 +3,7 @@ import DownloadButtons from './DownloadButtons'
 export default function CTA() {
   return (
     <section className="bg-white px-4 py-16 md:px-6 md:py-20">
-      <div className="mx-auto max-w-[1500px]">
+      <div className="mx-auto max-w-content">
         <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-bl-[10px] rounded-br-[120px] rounded-tl-[120px] rounded-tr-[10px] bg-navy px-6 py-20 text-center md:min-h-[560px] md:rounded-br-[220px] md:rounded-tl-[220px] md:px-16">
           <div className="relative z-10 mx-auto max-w-[820px]">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/80 md:text-base">

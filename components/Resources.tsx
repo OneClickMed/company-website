@@ -41,7 +41,7 @@ export default function Resources() {
   }, [])
 
   return (
-    <section className="mx-auto max-w-[1200px] px-6 py-20 md:px-10">
+    <section className="mx-auto max-w-content px-6 py-20 md:px-10">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="font-body text-[clamp(24px,3.5vw,42px)] font-extrabold leading-[1.2] text-black">
           Featured <b className="text-navy">Resources</b>

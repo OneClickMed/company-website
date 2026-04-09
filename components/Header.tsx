@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-navy/[0.08]">
-      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-6 px-6 md:px-10">
+      <div className="mx-auto flex h-[72px] max-w-content items-center justify-between gap-6 px-6 md:px-10">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img src="/Logo.svg" alt="OneClickMed" className="h-10 w-auto" />
