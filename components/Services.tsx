@@ -65,29 +65,24 @@ export default function Services() {
   }
 
   return (
-    <section className="bg-white px-6 py-20 md:px-10 md:py-24">
+    <section id="solutions" className="bg-white px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-content">
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div className="max-w-[860px]">
             <p className="font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black">
-              Our Services
+              OUR SERVICES
             </p>
             <h2 className="mt-5 max-w-[650px] font-body text-[clamp(38px,5vw,58px)] font-extrabold leading-[1.03] tracking-[-0.04em] text-black">
-              Tailored for <b className="font-accent italic text-black">Healthcare</b> Organizations
+              Tailored for <b className="font-accent">Healthcare</b> Organizations
             </h2>
             <p className="mt-6 max-w-[900px] font-body text-[17px] font-medium leading-[1.55] text-black">
-              Our services are designed for full-scale healthcare delivery and seamless institutional workflows.
-              From one-time registration through to remote consultations, we support your organisation every
-              step of the way. Explore how we assist you in managing operations more effectively
+              Our services are designed for full-scale healthcare delivery and seamless institutional
+              workflows. From one-time registration through to remote consultations, we support your
+              organisation every step of the way. Explore how we assist you in managing operations more
+              effectively
             </p>
           </div>
-          <Link
-            href="#"
-            className="inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#2a5fff] px-7 py-4 font-body text-[15px] font-bold text-white transition-all hover:-translate-y-px hover:bg-navy md:mb-1"
-          >
-            Learn More
-            <span aria-hidden="true">→</span>
-          </Link>
+
         </div>
 
         <div className="overflow-hidden">

@@ -1,10 +1,65 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { defaultDescription, defaultOgImage, defaultTitle, siteName, siteUrl } from '@/lib/seo'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'OneClickMed – One Click, One Heart, One Care',
-  description: 'A Digital Health Platform That Simplifies Care',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  applicationName: siteName,
+  manifest: '/manifest.webmanifest',
+  keywords: [
+    'OneClickMed',
+    'digital health',
+    'EHR',
+    'telemedicine',
+    'healthcare interoperability',
+    'Nigeria health tech',
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: defaultTitle,
+    description: defaultDescription,
+    siteName,
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteName} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [defaultOgImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  icons: {
+    icon: '/ocm-icon.png',
+    shortcut: '/ocm-icon.png',
+    apple: '/Logo.svg',
+  },
 }
 
 export default function RootLayout({

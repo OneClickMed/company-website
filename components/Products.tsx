@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useState } from 'react'
 
 type ProductKey = 'digital' | 'beta'
@@ -58,7 +59,7 @@ const BetaLogoIcon = () => (
 
 const products = {
   digital: {
-    eyebrow: 'Track your data',
+    eyebrow: 'For providers',
     title: 'Digital Health',
     subtitle: 'A comprehensive solution built for healthcare organizations.',
     description: 'Centralise patient data, enhance communication across departments, and support advanced diagnostics within a scalable and secure system.',
@@ -141,13 +142,13 @@ export default function Products() {
   )
 
   return (
-    <section className="px-5 py-20 md:px-10">
+    <section id="products" className="px-5 py-20 md:px-10">
       <div className="mx-auto max-w-content">
-        <h2 className="mx-auto max-w-[760px] text-center font-body text-[clamp(34px,4vw,52px)] font-medium leading-[1.05] text-black">
-          AI-powered tools for <b className="font-accent">smarter</b>, connected healthcare operations.
+        <h2 className="mx-auto max-w-[820px] text-center font-body text-[clamp(34px,4vw,52px)] font-medium leading-[1.05] text-black">
+          One Platform. Every Patient. <b className="font-accent">Everywhere.</b>
         </h2>
 
-        <div className="mx-auto mb-10 mt-9 grid w-fit grid-cols-2 overflow-hidden rounded-full border border-navy bg-white p-0">
+        <div className="mx-auto mb-10 mt-9 grid w-fit grid-cols-2 overflow-hidden rounded-[10px] border border-navy bg-white p-0">
           {(['digital', 'beta'] as const).map((tab) => {
             const isActive = activeTab === tab
             const activeBg = tab === 'digital' ? 'bg-light-yellow' : 'bg-blush-pink'
@@ -155,7 +156,7 @@ export default function Products() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`min-w-[200px] rounded-full px-8 py-4 font-body text-base font-semibold transition-all ${
+                className={`min-w-[200px] rounded-[8px] px-8 py-2.5 font-body text-base font-semibold transition-all ${
                   isActive ? `${activeBg} text-navy` : 'bg-white text-black hover:bg-ice-blue'
                 }`}
               >
@@ -191,6 +192,21 @@ export default function Products() {
                   </li>
                 ))}
               </ul>
+              {activeTab === 'beta' ? (
+                <Link
+                  href="/beta-health"
+                  className="mt-8 inline-flex rounded-[6px] bg-white px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-ice-blue"
+                >
+                  Explore Beta Health
+                </Link>
+              ) : (
+                <Link
+                  href="/digital-health"
+                  className="mt-8 inline-flex rounded-[6px] bg-white px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-ice-blue"
+                >
+                  Explore Digital Health
+                </Link>
+              )}
               <img src={product.image} alt={product.imageAlt} className={product.mobileImageClass} />
             </div>
             <img src={product.image} alt={product.imageAlt} className={product.imageClass} />

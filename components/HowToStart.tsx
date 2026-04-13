@@ -18,7 +18,7 @@ export default function HowToStart() {
   const [open, setOpen] = useState<'providers' | 'patients' | null>('providers')
 
   return (
-    <section className="bg-white px-6 py-20 md:px-10 md:py-24">
+    <section id="how-to-start" className="bg-white px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-content">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_0.9fr] md:items-start">
           <div>
@@ -29,9 +29,10 @@ export default function HowToStart() {
               Getting started is <b className="font-accent italic text-black">simple</b>.
             </h2>
           </div>
-          <p className="max-w-[520px] font-body text-[17px] font-medium leading-[1.45] text-black md:mt-6 md:justify-self-end">
+                    <p className="max-w-[520px] font-body text-[17px] font-medium leading-[1.45] text-black md:mt-6 md:justify-self-end">
             OneClick-Med makes connection effortless, ensuring providers and patients always have access to the information they need.
           </p>
+
         </div>
 
         <div className="mt-16 grid grid-cols-1 items-start gap-12 md:grid-cols-[0.82fr_1fr] md:gap-[120px]">
@@ -78,7 +79,7 @@ export default function HowToStart() {
                     href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex items-center gap-2 rounded-[6px] bg-[#2a5fff] px-6 py-4 font-body text-[15px] font-bold text-white transition-all hover:-translate-y-px hover:bg-navy"
+                    className="mt-8 inline-flex items-center gap-2 rounded-[5px] bg-[#2a5fff] px-6 py-4 font-body text-[15px] font-bold text-white transition-all hover:-translate-y-px hover:bg-navy"
                   >
                     Contact Sales Team
                     <span aria-hidden="true">→</span>

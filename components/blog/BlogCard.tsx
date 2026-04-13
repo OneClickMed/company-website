@@ -1,17 +1,22 @@
+'use client'
+
 import Link from 'next/link'
+import posthog from 'posthog-js'
 import { formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
 
 interface BlogCardProps {
   article: BlogArticle
+  appview?: boolean
 }
 
-export default function BlogCard({ article }: BlogCardProps) {
+export default function BlogCard({ article, appview = false }: BlogCardProps) {
   const summary = stripHtml(article.body || article.content || '').slice(0, 140)
 
   return (
     <Link
-      href={`/resources/${article.slug}`}
+      href={`/resources/${article.slug}${appview ? '?appview=true' : ''}`}
       className="group block min-w-[280px] overflow-hidden rounded-[22px] bg-ice-blue transition-transform duration-300 hover:-translate-y-1 md:min-w-0"
+      onClick={() => posthog.capture('blog_article_clicked', { article_slug: article.slug, article_title: article.title })}
     >
       <div
         className="relative h-[230px] bg-beige bg-cover bg-center"

@@ -1,3 +1,7 @@
+'use client'
+
+import posthog from 'posthog-js'
+
 const faqs = [
   {
     question: 'What is OneClick-Med?',
@@ -33,7 +37,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section className="bg-ice-blue px-6 py-20 md:px-10 md:py-24">
+    <section id="faq" className="bg-ice-blue px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-[980px]">
         <div className="mx-auto max-w-[740px] text-left md:text-center">
           <p className="font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black">
@@ -52,6 +56,11 @@ export default function FAQ() {
             <details
               key={faq.question}
               className="group rounded-[18px] bg-white px-6 py-5 shadow-sm transition-all duration-300 open:shadow-brand-menu md:px-8"
+              onToggle={(e) => {
+                if ((e.currentTarget as HTMLDetailsElement).open) {
+                  posthog.capture('faq_expanded', { question: faq.question })
+                }
+              }}
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-body text-[18px] font-extrabold leading-[1.35] text-black marker:hidden [&::-webkit-details-marker]:hidden">
                 <span>{faq.question}</span>

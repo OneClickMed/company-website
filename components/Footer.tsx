@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import posthog from 'posthog-js'
 
 const socialLinks = [
   {
@@ -42,6 +43,25 @@ const socialLinks = [
 
 export default function Footer() {
   const [email, setEmail] = useState('')
+  const resourceLinks = [
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-condition' },
+    { label: 'Frequently Asked Questions', href: '/#faq' },
+  ]
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email) {
+      posthog.capture('newsletter_subscribed', { email_domain: email.split('@')[1] ?? '' })
+    }
+  }
+  const quickLinks = [
+    { label: 'About', href: '/#about' },
+    { label: 'Resources', href: '/resources' },
+    { label: 'Digital Health', href: '/digital-health' },
+    { label: 'Beta Health', href: '/beta-health' },
+    { label: 'Contact', href: '/#contact' },
+  ]
 
   return (
     <footer className="bg-navy px-10 pt-16 pb-10 text-white/70">
@@ -53,17 +73,17 @@ export default function Footer() {
             <p className="text-sm leading-[1.7] my-4 max-w-[300px]">
               Be the first to hear about new features, product releases, and digital health updates from OneClick-Med.
             </p>
-            <form className="flex gap-2 max-w-[320px]" onSubmit={e => e.preventDefault()}>
+            <form className="flex gap-2 max-w-[320px]" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Email Address"
-                className="flex-1 px-3.5 py-2.5 rounded-lg border border-white/15 bg-white/[0.08] text-white text-sm placeholder-white/40 focus:outline-none focus:border-salmon-red font-body"
+                className="flex-1 px-3.5 py-2.5 rounded-md border border-white/15 bg-white/[0.08] text-white text-sm placeholder-white/40 focus:outline-none focus:border-salmon-red font-body"
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-lg bg-salmon-red text-white text-sm font-semibold whitespace-nowrap font-body hover:bg-salmon-red transition-colors"
+                className="px-4 py-2.5 rounded-[6px] bg-salmon-red text-white text-sm font-semibold whitespace-nowrap font-body hover:bg-salmon-red transition-colors"
               >
                 Subscribe
               </button>
@@ -74,9 +94,9 @@ export default function Footer() {
           <div>
             <h4 className="font-body text-sm font-bold text-white mb-4 tracking-[0.02em]">Resources</h4>
             <ul className="flex flex-col gap-2.5">
-              {['Privacy Policy', 'Terms of Service', 'Frequently Asked Questions'].map(item => (
-                <li key={item}>
-                  <Link href="#" className="text-sm text-white/60 hover:text-white transition-colors">{item}</Link>
+              {resourceLinks.map(item => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm text-white/60 hover:text-white transition-colors">{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -120,9 +140,9 @@ export default function Footer() {
           <div>
             <h4 className="font-body text-sm font-bold text-white mb-4 tracking-[0.02em]">Quick Links</h4>
             <ul className="flex flex-col gap-2.5">
-              {['About', 'Resources', 'Digital Health', 'Beta Health', 'Contact'].map(item => (
-                <li key={item}>
-                  <Link href="#" className="text-sm text-white/60 hover:text-white transition-colors">{item}</Link>
+              {quickLinks.map(item => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm text-white/60 hover:text-white transition-colors">{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -141,6 +161,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={`Visit OneClickMed on ${social.label}`}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.08] transition-all hover:border-salmon-red hover:bg-salmon-red"
+                onClick={() => posthog.capture('social_link_clicked', { platform: social.label })}
               >
                 <svg className="h-3.5 w-3.5 fill-white" viewBox={social.icon.props.viewBox}>
                   {social.icon.props.children}

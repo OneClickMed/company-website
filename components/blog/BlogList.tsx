@@ -102,11 +102,11 @@ export default function BlogList() {
               value={searchQuery}
               onChange={(event) => handleSearch(event.target.value)}
               placeholder="Search resources..."
-              className="min-h-[48px] flex-1 rounded-[14px] border border-black/10 px-4 font-body text-sm text-black outline-none transition-colors placeholder:text-black/40 focus:border-navy"
+              className="min-h-[48px] flex-1 rounded-[8px] border border-black/10 px-4 font-body text-sm text-black outline-none transition-colors placeholder:text-black/40 focus:border-navy"
             />
             <button
               type="submit"
-              className="min-h-[48px] rounded-[14px] bg-navy px-6 text-sm font-bold text-white transition-colors hover:bg-cobalt"
+              className="min-h-[48px] rounded-[8px] bg-navy px-6 text-sm font-bold text-white transition-colors hover:bg-cobalt"
             >
               Search
             </button>
@@ -119,7 +119,7 @@ export default function BlogList() {
                 type="button"
                 onClick={() => handleCategoryChange(option.value)}
                 disabled={status === 'loading'}
-                className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`whitespace-nowrap rounded-[8px] border px-4 py-2 text-sm font-semibold transition-colors ${
                   selectedCategory === option.value
                     ? 'border-navy bg-navy text-white'
                     : 'border-navy/20 bg-white text-navy hover:bg-ice-blue'

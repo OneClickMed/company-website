@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import posthog from 'posthog-js'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -16,25 +17,23 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-2">
-          <Link href="#" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-lg hover:bg-ice-blue hover:text-navy transition-all">About</Link>
-          <Link href="/resources" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-lg hover:bg-ice-blue hover:text-navy transition-all">Resources</Link>
-
-          {/* Products dropdown */}
           <div className="relative" onMouseEnter={() => setProductsOpen(true)} onMouseLeave={() => setProductsOpen(false)}>
-            <button className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-lg hover:bg-ice-blue hover:text-navy transition-all flex items-center gap-1">
-              Products <span className="text-xs">▾</span>
+            <button className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all flex items-center gap-1">
+              Product <span className="text-xs">▾</span>
             </button>
-            <div className={`absolute top-[calc(100%+8px)] left-0 bg-white border border-navy/[0.12] rounded-xl p-2 min-w-[220px] shadow-brand-menu transition-all duration-200 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-              <Link href="#" className="block rounded-lg bg-navy px-4 py-3 transition-all hover:bg-cobalt">
-                <img src="/digital-health-logo.png" alt="Digital Health" className="h-5 w-auto" />
+            <div className={`absolute top-full left-0 bg-white border border-navy/[0.12] rounded-md p-2 min-w-[220px] shadow-brand-menu transition-all duration-200 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+              <Link href="/digital-health" className="block rounded-md px-4 py-2 font-body text-sm font-medium text-black transition-all hover:bg-ice-blue hover:text-navy">
+                Digital Health
               </Link>
-              <Link href="#" className="mt-2 block rounded-lg bg-navy px-4 py-3 transition-all hover:bg-cobalt">
-                <img src="/beta-health-logo.png" alt="Beta Health" className="h-5 w-auto" />
+              <Link href="/beta-health" className="mt-1 block rounded-md px-4 py-2 font-body text-sm font-medium text-black transition-all hover:bg-ice-blue hover:text-navy">
+                Beta Health
               </Link>
             </div>
           </div>
-
-          <Link href="#" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-lg hover:bg-ice-blue hover:text-navy transition-all">Contact</Link>
+          <Link href="/#solutions" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all">Solutions</Link>
+          <Link href="/resources" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all">Resources</Link>
+          <Link href="/#about" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all">About</Link>
+          <Link href="/#contact" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all">Contact</Link>
         </nav>
 
         {/* CTA */}
@@ -42,7 +41,8 @@ export default function Header() {
           href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 px-[22px] py-[10px] rounded-[10px] bg-salmon-red text-white text-sm font-semibold font-body hover:bg-salmon-red/90 hover:-translate-y-px hover:shadow-brand-blue transition-all"
+          className="hidden md:inline-flex items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold font-body hover:bg-salmon-red/90 hover:-translate-y-px transition-all"
+          onClick={() => posthog.capture('book_demo_clicked', { location: 'header_desktop' })}
         >
           Book a Demo
         </Link>
@@ -59,18 +59,28 @@ export default function Header() {
       {mobileOpen && (
         <div className="md:hidden border-t border-navy/[0.08] px-5 py-4 flex flex-col gap-2 bg-white">
           {[
-            { label: 'About', href: '#' },
+            { label: 'Digital Health', href: '/digital-health' },
+            { label: 'Beta Health', href: '/beta-health' },
+            { label: 'Solutions', href: '/#solutions' },
             { label: 'Resources', href: '/resources' },
-            { label: 'Products', href: '#' },
-            { label: 'Contact', href: '#' },
+            { label: 'About', href: '/#about' },
+            { label: 'Contact', href: '/#contact' },
           ].map(item => (
-            <Link key={item.label} href={item.href} className="text-[15px] font-medium text-black px-4 py-2 rounded-lg hover:bg-ice-blue">{item.label}</Link>
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue"
+              onClick={() => posthog.capture('nav_link_clicked', { label: item.label, location: 'mobile_menu' })}
+            >
+              {item.label}
+            </Link>
           ))}
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex justify-center items-center gap-2 px-[22px] py-[10px] rounded-[10px] bg-salmon-red text-white text-sm font-semibold"
+            className="mt-2 inline-flex justify-center items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold"
+            onClick={() => posthog.capture('book_demo_clicked', { location: 'header_mobile' })}
           >
             Book a Demo
           </Link>

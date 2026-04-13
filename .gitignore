@@ -4,3 +4,6 @@
 node_modules
 .DS_Store
 company-website-1/
+.env.local
+.company-website-1
+*.md

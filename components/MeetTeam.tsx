@@ -26,7 +26,7 @@ const teamMembers: TeamMember[] = [
     frameClass: 'rounded-tl-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-[64px]',
     cardTint: 'bg-[#fffef5]',
     image:
-      'https://images.unsplash.com/photo-1611432579699-484f7990b127?auto=format&fit=crop&w=900&q=80',
+      '',
   },
   {
     name: 'Ajomale Wale',
@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
     accent: 'bg-cobalt',
     frameClass: 'rounded-tl-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-[64px]',
     cardTint: 'bg-[#f5f8ff]',
-    image: '/nelsonfai.PNG',
+    image: ""
   },
   {
     name: 'Kingsley Usuro',

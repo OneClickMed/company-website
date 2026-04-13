@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import posthog from 'posthog-js'
 import {
   formatDate,
   getArticleBySlug,
@@ -14,9 +15,10 @@ import BlogCard from './BlogCard'
 
 interface BlogDetailProps {
   slug: string
+  appview?: boolean
 }
 
-export default function BlogDetail({ slug }: BlogDetailProps) {
+export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
   const [article, setArticle] = useState<BlogArticle | null>(null)
   const [suggestedArticles, setSuggestedArticles] = useState<BlogArticle[]>([])
   const [status, setStatus] = useState<'loading' | 'idle' | 'error' | 'empty'>('loading')
@@ -44,6 +46,11 @@ export default function BlogDetail({ slug }: BlogDetailProps) {
           suggestions.filter((suggestion) => suggestion.slug !== articleData.slug)
         )
         setStatus('idle')
+        posthog.capture('blog_article_viewed', {
+          article_slug: articleData.slug,
+          article_title: articleData.title,
+          author: articleData.author ?? 'OneClickMed',
+        })
       } catch {
         setStatus('error')
       }
@@ -54,7 +61,7 @@ export default function BlogDetail({ slug }: BlogDetailProps) {
 
   return (
     <main className="min-h-screen bg-white px-4 py-16 md:px-10">
-      <div className="mx-auto max-w-[980px]">
+      <div className="mx-auto w-full max-w-content">
 
 
         {status === 'loading' ? (
@@ -82,17 +89,17 @@ export default function BlogDetail({ slug }: BlogDetailProps) {
 
         {status === 'idle' && article ? (
           <article>
-            <div className="text-center">
+            <div className="text-left">
 
               <h1 className="font-body text-[clamp(34px,5vw,64px)] font-extrabold leading-[1.05] text-black">
                 {article.title}
               </h1>
               {article.subtitle ? (
-                <p className="mx-auto mt-4 max-w-[720px] text-lg leading-[1.6] text-black/60">
+                <p className="mt-4 text-lg leading-[1.6] text-black/60">
                   {article.subtitle}
                 </p>
               ) : null}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-salmon-red">
+              <div className="mt-5 flex flex-wrap items-center gap-4 text-sm font-semibold text-salmon-red">
                 <span>{article.author || 'OneClickMed'}</span>
                 {article.createdAt ? <span>{formatDate(article.createdAt)}</span> : null}
               </div>
@@ -107,7 +114,7 @@ export default function BlogDetail({ slug }: BlogDetailProps) {
             ) : null}
 
             <div
-              className="mx-auto mt-10 max-w-[820px] font-body text-[17px] leading-[1.9] text-black/75 [&_a]:font-bold [&_a]:text-navy [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-black [&_h3]:mb-3 [&_h3]:mt-8 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:text-black [&_img]:rounded-[18px] [&_li]:mb-2 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6"
+              className="mt-10 font-body text-[17px] leading-[1.9] text-black/75 [&_a]:font-bold [&_a]:text-navy [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-black [&_h3]:mb-3 [&_h3]:mt-8 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:text-black [&_img]:rounded-[18px] [&_li]:mb-2 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6"
               dangerouslySetInnerHTML={{
                 __html: article.content || article.body || stripHtml(article.body),
               }}
@@ -123,6 +130,7 @@ export default function BlogDetail({ slug }: BlogDetailProps) {
                     <BlogCard
                       key={suggestedArticle.id || suggestedArticle.slug}
                       article={suggestedArticle}
+                      appview={appview}
                     />
                   ))}
                 </div>
