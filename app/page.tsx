@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: `${siteName} – One Click, One Heart, One Care`,
+    title: `${siteName} – One Click, Total care !`,
     description: defaultDescription,
     url: '/',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteName} – One Click, One Heart, One Care`,
+    title: `${siteName} – One Click, Total care !`,
     description: defaultDescription,
   },
 }
