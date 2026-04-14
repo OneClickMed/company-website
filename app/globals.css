@@ -89,3 +89,41 @@ b {
 .carousel-track::-webkit-scrollbar {
   display: none;
 }
+
+.people-carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.people-carousel-track {
+  display: flex;
+  width: 300%;
+  animation: people-carousel-rotate 15s ease-in-out infinite;
+}
+
+.people-slide {
+  position: relative;
+  width: 33.333333%;
+  flex: 0 0 33.333333%;
+}
+
+@keyframes people-carousel-rotate {
+  0%, 28% {
+    transform: translateX(0);
+  }
+  33%, 61% {
+    transform: translateX(-33.333333%);
+  }
+  66%, 94% {
+    transform: translateX(-66.666667%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .people-carousel-track {
+    animation: none;
+  }
+}

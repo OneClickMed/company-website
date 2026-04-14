@@ -39,32 +39,87 @@ export const metadata: Metadata = {
 }
 
 const trustItems = [
-  'Hospitals and clinics',
-  'End-to-end encrypted',
-  'iOS and Android',
-  'Built for Africa',
-  'AI-powered',
-  'Offline-ready',
+  { icon: '🔒', label: 'End-to-end encrypted' },
+  { icon: '💳', label: 'Free to download' },
+  { icon: '📡', label: 'Works offline' },
+  { icon: '📱', label: 'iOS + Android' },
 ]
 
 const statCards = [
   {
-    value: '1-tap',
-    title: 'access to your full medical history',
-    copy: 'No more repeating your health story at every hospital. Your records travel with you.',
-    className: 'bg-cobalt text-white rounded-[10px] md:rounded-br-[180px]',
+    value: '1x',
+    title: 'enter your health data once',
+    copy: 'Create your profile once and never fill the same forms again — your information follows you everywhere.',
+    className: 'rounded-[14px] bg-navy text-white',
+  },
+  {
+    value: 'Instant',
+    title: 'share records across hospitals',
+    copy: 'Securely send your medical history to any provider in seconds — no delays, no back-and-forth.',
+    className: 'rounded-[14px] bg-ice-blue text-navy',
+  },
+  {
+    value: '0',
+    title: 'paper records to carry',
+    copy: 'Everything is stored digitally and securely, so you never have to carry or lose physical files.',
+    className: 'rounded-[14px] bg-light-yellow text-navy',
+  },
+  {
+    value: '0',
+    title: 'repeated tests or scans',
+    copy: 'Avoid unnecessary tests — doctors can access your previous results instantly.',
+    className: 'rounded-[14px] bg-navy text-white',
+  },
+  {
+    value: 'Full',
+    title: 'control over your data',
+    copy: 'Decide who can access your records and revoke permissions anytime, with complete transparency.',
+    className: 'rounded-[14px] bg-ice-blue text-navy',
+  },
+  {
+    value: 'Instant',
+    title: 'emergency access when it matters',
+    copy: 'Share your location and critical medical information in seconds — even if you can’t speak for yourself.',
+    className: 'rounded-[14px] bg-light-yellow text-navy',
   },
   {
     value: '24/7',
-    title: 'AI health guidance at your fingertips',
-    copy: 'Get instant symptom assessments and answers to your health questions, anytime.',
-    className: 'bg-ice-blue text-black rounded-[10px] md:rounded-tl-[180px]',
+    title: 'access to your records',
+    copy: 'Your health information is always available — anytime, anywhere, from your phone.',
+    className: 'rounded-[14px] bg-navy text-white',
   },
   {
-    value: '8 min',
-    title: 'average emergency response time',
-    copy: 'One tap dispatches support with your health profile pre-loaded for the response team.',
-    className: 'bg-navy text-white rounded-[10px] md:rounded-bl-[180px]',
+    value: 'Seamless',
+    title: 'care across multiple hospitals',
+    copy: 'Move between providers without losing your history, ensuring consistent and informed treatment.',
+    className: 'rounded-[14px] bg-ice-blue text-navy',
+  },
+  {
+    value: 'Faster',
+    title: 'treatment with full context',
+    copy: 'Doctors see your history before treatment begins, reducing delays and improving care decisions.',
+    className: 'rounded-[14px] bg-light-yellow text-navy',
+  },
+]
+
+const peopleSlides = [
+  {
+    image: '/Interoperability%20(1).png',
+    alt: 'Interoperability in healthcare',
+    title: 'Amaka, 34 — Lagos',
+    copy: 'Shared her records with 3 different hospitals last year — without repeating a single form.',
+  },
+  {
+    image: '/Optimize%20822x640.png',
+    alt: 'Optimized healthcare support',
+    title: 'Dr. Emeka — Abuja',
+    copy: 'Gets complete patient histories on arrival so care starts immediately, not after paperwork.',
+  },
+  {
+    image: '/Empower%20Image.png',
+    alt: 'Empowered emergency response',
+    title: 'The Adeyemi Family — Ibadan',
+    copy: 'Manages health records for multiple family members in one secure place.',
   },
 ]
 
@@ -272,6 +327,94 @@ export default function BetaHealthPage() {
         </section>
 
 
+
+<section className="px-6 py-10 md:px-10 md:py-14">
+  <div className="mx-auto max-w-content">
+    <div className="mt-10 grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
+      {/* Sticky left column */}
+      <div className="grid gap-6 lg:sticky lg:top-24">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-salmon-red">
+            For Real People
+          </p>
+          <h2 className="mt-4 font-body text-[clamp(32px,4.2vw,52px)] font-extrabold leading-[1.06] text-black">
+            Healthcare that moves
+            <br />
+            as fast as <b className="font-accent">you do.</b>
+          </h2>
+        </div>
+
+        <div>
+          <p className="text-lg font-medium leading-[1.6] text-black/75">
+            From a routine check-up to a midnight emergency, Beta Health keeps your
+            records, identity, and care tools connected so every healthcare moment is
+            faster and safer.
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-[20px] rounded-br-[100px] md:rounded-br-[140px]">
+          <div className="people-carousel">
+            <div className="people-carousel-track">
+              {peopleSlides.map((slide) => (
+                <div
+                  key={slide.image}
+                  className="people-slide relative h-[280px] overflow-hidden rounded-[20px] rounded-br-[100px] md:h-[380px] md:rounded-br-[140px]"
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.alt}
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                  />
+
+                  {/* Slightly darker, more stable text overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-transparent" />
+
+                  {/* Overlay content */}
+                  <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-7 md:pb-7">
+                    <div className="max-w-[78%] md:max-w-[72%]">
+                      <p className="text-[clamp(18px,1.5vw,24px)] font-semibold leading-[1.15] tracking-[-0.02em] text-white">
+                        {slide.title}
+                      </p>
+                      <p className="mt-2 text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.45] text-white">
+                        {slide.copy}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Stacking cards column */}
+      <div className="relative grid gap-5">
+        {statCards.map((card, index) => (
+          <article
+            key={card.value}
+            className={`min-h-[260px] rounded-[28px] p-8  shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:p-10 lg:sticky ${card.className}`}
+            style={{
+              top: `calc(50vh - 150px + ${index * 18}px)`,
+            }}
+          >
+            <p className="font-accent text-xl leading-none ">
+              {card.value}
+            </p>
+
+            <h3 className="mt-3 max-w-[360px] text-4xl font-bold leading-[1.15] tracking-[-0.02em]">
+              {card.title}
+            </h3>
+
+            <p className="mt-4 max-w-[460px] text-lg font-medium leading-[1.65] ">
+              {card.copy}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
         <section className="relative overflow-hidden px-6 py-16 md:px-10 md:py-20">
           <div className="pointer-events-none absolute -left-24 top-6 h-52 w-52 rounded-full bg-cobalt/10" />
           <div className="pointer-events-none absolute -right-24 bottom-6 h-64 w-64 rounded-full bg-salmon-red/10" />
@@ -290,11 +433,10 @@ export default function BetaHealthPage() {
                 >
                   <div>
                     <span
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-[10px] text-xs font-bold ${
-                        feature.tone.includes('text-white')
+                      className={`inline-flex h-11 w-11 items-center justify-center rounded-[10px] text-xs font-bold ${feature.tone.includes('text-white')
                           ? 'bg-white/15 text-white'
                           : 'bg-navy/10 text-navy'
-                      }`}
+                        }`}
                     >
                       {feature.icon}
                     </span>
