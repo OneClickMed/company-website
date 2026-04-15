@@ -61,7 +61,6 @@ export default function Header() {
           {[
             { label: 'Digital Health', href: '/digital-health' },
             { label: 'Beta Health', href: '/beta-health' },
-            { label: 'Solutions', href: '/#solutions' },
             { label: 'Resources', href: '/resources' },
             { label: 'About', href: '/#about' },
             { label: 'Contact', href: '/#contact' },

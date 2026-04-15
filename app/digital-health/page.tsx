@@ -51,8 +51,8 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M5 20V19C5 15.134 8.134 12 12 12C15.866 12 19 15.134 19 19V20" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
-        <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7"/>
+        <path d="M5 20V19C5 15.134 8.134 12 12 12C15.866 12 19 15.134 19 19V20" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7" />
       </svg>
     ),
     title: 'Unified Patient Profiles',
@@ -61,8 +61,8 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
-        <path d="M20 17.6C21.5 17 23 15.7 23 13C23 9 19.7 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.3 8 1 9 1 13C1 15.7 2.5 17 4 17.6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+        <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M20 17.6C21.5 17 23 15.7 23 13C23 9 19.7 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.3 8 1 9 1 13C1 15.7 2.5 17 4 17.6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
       </svg>
     ),
     title: 'Cloud-Based Record Access',
@@ -71,8 +71,8 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M14 12C14 9.5 11.7 7 8.9 7H7.1C4.3 7 2 9.2 2 12C2 14.4 3.7 16.4 6 16.9" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
-        <path d="M10 12C10 14.5 12.3 17 15.1 17H16.9C19.7 17 22 14.8 22 12C22 9.6 20.3 7.6 18 7.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+        <path d="M14 12C14 9.5 11.7 7 8.9 7H7.1C4.3 7 2 9.2 2 12C2 14.4 3.7 16.4 6 16.9" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M10 12C10 14.5 12.3 17 15.1 17H16.9C19.7 17 22 14.8 22 12C22 9.6 20.3 7.6 18 7.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
       </svg>
     ),
     title: 'Secure Data Interoperability',
@@ -81,7 +81,7 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M11.5 3C11.5 3 12.8 6.7 14.5 8.5C16.3 10.2 20 11.5 20 11.5C20 11.5 16.3 12.8 14.5 14.5C12.8 16.3 11.5 20 11.5 20C11.5 20 10.2 16.3 8.5 14.5C6.7 12.8 3 11.5 3 11.5C3 11.5 6.7 10.2 8.5 8.5C10.2 6.7 11.5 3 11.5 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+        <path d="M11.5 3C11.5 3 12.8 6.7 14.5 8.5C16.3 10.2 20 11.5 20 11.5C20 11.5 16.3 12.8 14.5 14.5C12.8 16.3 11.5 20 11.5 20C11.5 20 10.2 16.3 8.5 14.5C6.7 12.8 3 11.5 3 11.5C3 11.5 6.7 10.2 8.5 8.5C10.2 6.7 11.5 3 11.5 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
       </svg>
     ),
     title: 'AI-Assisted Clinical Workflows',
@@ -117,20 +117,26 @@ export default function DigitalHealthPage() {
       <main className="min-h-screen">
 
         {/* ── HERO ── */}
+
+
         <section className="mx-auto max-w-content px-6 pt-28 pb-20 md:px-10">
-          <div className="grid items-center gap-4 lg:grid-cols-2">
+          <div className="grid lg:grid-cols-2 items-center">
+
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-ice-blue px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-navy">
                 For Providers
               </span>
-              <h1 className="mt-5 font-body text-[clamp(40px,6vw,68px)] font-extrabold leading-[1.02] text-black">
+
+              <h1 className="mt-5 font-body text-[clamp(54px,7vw,72px)] font-extrabold leading-[1.02] text-black">
                 Digital{' '}
                 <b className="font-accent italic text-navy">Health</b>
               </h1>
-              <p className="mt-5 max-w-[560px] text-[17px] leading-[1.7] text-black/65">
+
+              <p className="mt-5 max-w-[560px] text-lg leading-[1.7] text-black/65">
                 A comprehensive provider platform built to centralise records, reduce operational friction,
                 and improve patient outcomes through connected care.
               </p>
+
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
@@ -140,6 +146,7 @@ export default function DigitalHealthPage() {
                 >
                   Book a Demo
                 </a>
+
                 <a
                   href="#interactive-demo"
                   className="inline-flex items-center gap-2 rounded-[8px] border border-navy/20 bg-white px-6 py-3 text-sm font-bold text-navy transition-all hover:-translate-y-px hover:bg-ice-blue"
@@ -149,31 +156,56 @@ export default function DigitalHealthPage() {
               </div>
             </div>
 
-            {/* hero image card */}
-            <div className="relative">
-              <div className="rounded-[24px] p-2 md:p-4 ">
+
+            <div className="relative mt-10 lg:mt-0">
+              {/* Subtle background rings */}
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="absolute h-[420px] w-[420px] rounded-full border border-navy/10" />
+                <div className="absolute h-[540px] w-[540px] rounded-full border border-navy/5" />
+                <div className="absolute h-[660px] w-[660px] rounded-full border border-navy/5" />
+              </div>
+
+              {/* Floating cards */}
+
+              {/* Left - Patient Records */}
+              <div className="absolute left-[-10px] top-[80px] hidden md:block rounded-[14px] border border-black/5 bg-light-yellow px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
+                  Patient Records
+                </p>
+                <p className="text-sm font-bold text-black">Unified profiles</p>
+              </div>
+
+              {/* Top Right - Workflow */}
+              <div className="absolute right-[0px] top-[20px] hidden md:block rounded-[14px] border border-black/5 bg-ice-blue px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
+                  Workflow
+                </p>
+                <p className="text-sm font-bold text-black">Less admin time</p>
+              </div>
+
+              {/* Outer Ring - Connected Care (moved further out) */}
+              <div className="absolute right-[-80px] bottom-[-20px] hidden md:block rounded-[14px] border border-black/5 bg-[#EAF7EE] px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
+                  Connected Care
+                </p>
+                <p className="text-sm font-bold text-black">Secure data sharing</p>
+              </div>
+
+              {/* Main image */}
+              <div className="relative z-10 rounded-[24px] p-4">
                 <img
                   src="/hero_doctors.png"
                   alt="Digital Health platform interface"
                   className="w-full rounded-[14px]"
                 />
               </div>
-              {/* floating badge */}
-              <div className="absolute -bottom-5 -left-4 hidden md:flex items-center gap-3 rounded-[14px] bg-white px-5 py-3 shadow-[0_4px_24px_rgba(0,0,0,0.10)] border border-black/5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-light-yellow text-navy">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 20V19C5 15.134 8.134 12 12 12C15.866 12 19 15.134 19 19V20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-[11px] font-semibold text-black/40 uppercase tracking-wide">Unified profiles</p>
-                  <p className="text-sm font-bold text-black">Zero duplicate records</p>
-                </div>
-              </div>
             </div>
+
           </div>
         </section>
+
+
+
 
         {/* ── STATS STRIP ── */}
         <section className="bg-navy px-6 py-10 md:px-10">
@@ -189,46 +221,50 @@ export default function DigitalHealthPage() {
           </div>
         </section>
 
-        {/* ── FEATURES ── */}
-        <section className="mx-auto max-w-content px-6 py-20 md:px-10 md:py-28">
-          <div className="mb-12">
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">Platform capabilities</p>
-            <h2 className="mt-3 font-body text-[clamp(32px,4vw,48px)] font-extrabold leading-[1.05] text-black">
-              Everything your team needs,<br className="hidden md:block" />
-              <b className="font-accent italic"> in one place</b>
-            </h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((f, i) => (
-              <div
-                key={f.title}
-                className={`rounded-[20px] p-7 flex flex-col gap-4 ${
-                  i === 0 ? 'bg-navy text-white' :
-                  i === 1 ? 'bg-light-yellow text-black' :
-                  i === 2 ? 'bg-ice-blue text-black' :
-                  'bg-beige text-black'
-                }`}
-              >
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                  i === 0 ? 'bg-white/10 text-white' :
-                  i === 1 ? 'bg-black/10 text-navy' :
-                  'bg-navy/10 text-navy'
-                }`}>
-                  {f.icon}
+        <section className="mx-auto max-w-content px-6 md:px-10 min-h-[750px] flex items-center">
+          <div className="w-full py-20 md:py-28">
+
+            <div className="mb-12">
+              <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">
+                Platform capabilities
+              </p>
+              <h2 className="mt-3 font-body text-[clamp(32px,4vw,48px)] font-extrabold leading-[1.05] text-black">
+                Everything your team needs,<br className="hidden md:block" />
+                <b className="font-accent italic"> in one place</b>
+              </h2>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {features.map((f, i) => (
+                <div
+                  key={f.title}
+                  className={`rounded-[20px] p-7 flex flex-col gap-4 ${i === 0 ? 'bg-navy text-white' :
+                      i === 1 ? 'bg-light-yellow text-black' :
+                        i === 2 ? 'bg-ice-blue text-black' :
+                          'bg-beige text-black'
+                    }`}
+                >
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${i === 0 ? 'bg-white/10 text-white' :
+                      i === 1 ? 'bg-black/10 text-navy' :
+                        'bg-navy/10 text-navy'
+                    }`}>
+                    {f.icon}
+                  </div>
+
+                  <div>
+                    <h3 className={`font-body text-[16px] font-extrabold leading-[1.2] mb-2 ${i === 0 ? 'text-white' : 'text-black'}`}>
+                      {f.title}
+                    </h3>
+                    <p className={`text-[14px] leading-[1.6] ${i === 0 ? 'text-white/70' : 'text-black/60'}`}>
+                      {f.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className={`font-body text-[16px] font-extrabold leading-[1.2] mb-2 ${i === 0 ? 'text-white' : 'text-black'}`}>
-                    {f.title}
-                  </h3>
-                  <p className={`text-[14px] leading-[1.6] ${i === 0 ? 'text-white/70' : 'text-black/60'}`}>
-                    {f.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
           </div>
         </section>
-
         {/* ── INTERACTIVE DEMO ── */}
         <section id="interactive-demo" className="bg-ice-blue px-6 py-20 md:px-10 md:py-24">
           <div className="mx-auto max-w-content">

@@ -487,61 +487,9 @@ export default function BetaHealthPage() {
           </div>
         </section>
 
-        <section className="px-6 py-16 md:px-10 md:py-20">
-          <div className="mx-auto grid max-w-content items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <article className="relative overflow-hidden rounded-[24px] bg-navy p-9 text-white">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cobalt/20" />
-              <div className="pointer-events-none absolute -bottom-10 -left-10 h-44 w-44 rounded-full bg-salmon-red/20" />
 
-              <div className="relative z-10">
-                <div className="mb-7 h-9 w-11 rounded-[6px] bg-light-yellow/90" />
-                <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/55">
-                  Beta Health - Digital Health Passport
-                </p>
-                <p className="mt-2 font-accent text-[34px]">Adaobi Okonkwo</p>
-                <p className="text-xs font-semibold tracking-[0.08em] text-white/45">OTR-NG-2024-009382</p>
 
-                <div className="mt-7 grid grid-cols-2 gap-4">
-                  {[
-                    ['Blood Group', 'O+'],
-                    ['Genotype', 'AA'],
-                    ['Allergies', 'Penicillin'],
-                    ['Last Visit', 'Mar 28, 2025'],
-                  ].map(([label, value]) => (
-                    <div key={label}>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-white/45">{label}</p>
-                      <p className="mt-1 text-sm font-semibold text-white/90">{value}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </article>
-
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.1em] text-black/45">Your Health Identity</p>
-              <h2 className="mt-3 font-body text-[clamp(30px,3.8vw,44px)] font-extrabold leading-[1.08] text-black">
-                One ID.<br />
-                <b className="font-accent">Every hospital.</b><br />
-                Zero forms.
-              </h2>
-              <p className="mt-5 text-[17px] font-medium leading-[1.65] text-black/65">
-                Your Beta Health passport is your verified medical identity. When presented at partnered facilities,
-                your history, allergies, and medication context are ready instantly.
-              </p>
-
-              <div className="mt-6 space-y-3">
-                {perks.map((perk) => (
-                  <div key={perk} className="flex items-start gap-3 text-[15px] font-medium text-black/75">
-                    <span className="mt-[6px] inline-block h-2 w-2 rounded-full bg-cobalt" aria-hidden="true" />
-                    <span>{perk}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 pb-16 md:px-10 md:pb-20">
+        <section className="px-6 pb-16 md:px-10 md:py-20">
           <div className="relative mx-auto max-w-content overflow-hidden rounded-bl-[10px] rounded-br-[120px] rounded-tl-[120px] rounded-tr-[10px] bg-navy px-8 py-16 text-center md:px-14 md:py-20">
             <div className="pointer-events-none absolute -left-20 -top-16 h-56 w-56 rounded-full bg-cobalt/25" />
             <div className="pointer-events-none absolute -bottom-20 -right-16 h-56 w-56 rounded-full bg-salmon-red/25" />
