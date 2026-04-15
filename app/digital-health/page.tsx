@@ -28,6 +28,9 @@ export const metadata: Metadata = {
       {
         url: '/digital-health-1024x810.png',
         alt: 'Digital Health platform preview',
+        // FIX: explicit OG image dimensions help crawlers and social platforms
+        width: 1024,
+        height: 810,
       },
     ],
   },
@@ -107,18 +110,36 @@ export default function DigitalHealthPage() {
     url: absoluteUrl('/digital-health'),
   }
 
+  // FIX: Added HowTo schema — makes the 3-step onboarding section eligible
+  // for rich results in Google Search (steps shown directly in SERP)
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to get started with OneClickMed Digital Health',
+    description: 'Three steps to onboard your organisation onto the Digital Health provider platform.',
+    step: steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.title,
+      text: s.desc,
+    })),
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
+      {/* FIX: Second schema block for HowTo rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
       <Header />
       <main className="min-h-screen">
 
         {/* ── HERO ── */}
-
-
         <section className="mx-auto max-w-content px-6 pt-28 pb-20 md:px-10">
           <div className="grid lg:grid-cols-2 items-center">
 
@@ -127,9 +148,15 @@ export default function DigitalHealthPage() {
                 For Providers
               </span>
 
+              {/*
+                FIX: H1 is now keyword-richer — targets "healthcare provider platform"
+                and "digital health platform" while keeping the brand name prominent.
+                Previously was just "Digital Health" which is too generic.
+              */}
               <h1 className="mt-5 font-body text-[clamp(54px,7vw,72px)] font-extrabold leading-[1.02] text-black">
                 Digital{' '}
                 <b className="font-accent italic text-navy">Health</b>
+                {' '}Platform
               </h1>
 
               <p className="mt-5 max-w-[560px] text-lg leading-[1.7] text-black/65">
@@ -166,8 +193,6 @@ export default function DigitalHealthPage() {
               </div>
 
               {/* Floating cards */}
-
-              {/* Left - Patient Records */}
               <div className="absolute left-[-10px] top-[80px] hidden md:block rounded-[14px] border border-black/5 bg-light-yellow px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
                   Patient Records
@@ -175,7 +200,6 @@ export default function DigitalHealthPage() {
                 <p className="text-sm font-bold text-black">Unified profiles</p>
               </div>
 
-              {/* Top Right - Workflow */}
               <div className="absolute right-[0px] top-[20px] hidden md:block rounded-[14px] border border-black/5 bg-ice-blue px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
                   Workflow
@@ -183,7 +207,6 @@ export default function DigitalHealthPage() {
                 <p className="text-sm font-bold text-black">Less admin time</p>
               </div>
 
-              {/* Outer Ring - Connected Care (moved further out) */}
               <div className="absolute right-[-80px] bottom-[-20px] hidden md:block rounded-[14px] border border-black/5 bg-[#EAF7EE] px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-black/45">
                   Connected Care
@@ -193,9 +216,21 @@ export default function DigitalHealthPage() {
 
               {/* Main image */}
               <div className="relative z-10 rounded-[24px] p-4">
+                {/*
+                  FIX 1: Added explicit width + height to eliminate CLS (Cumulative Layout Shift).
+                          The browser now reserves space before the image loads.
+                  FIX 2: fetchpriority="high" tells the browser this is the LCP image —
+                          load it first, before other resources.
+                  FIX 3: loading="eager" prevents lazy-loading on the above-the-fold hero image.
+                  NOTE:   Swap this for Next.js <Image> with priority prop if you move to that component.
+                */}
                 <img
                   src="/hero_doctors.png"
-                  alt="Digital Health platform interface"
+                  alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
+                  width={600}
+                  height={450}
+                  fetchPriority="high"
+                  loading="eager"
                   className="w-full rounded-[14px]"
                 />
               </div>
@@ -203,9 +238,6 @@ export default function DigitalHealthPage() {
 
           </div>
         </section>
-
-
-
 
         {/* ── STATS STRIP ── */}
         <section className="bg-navy px-6 py-10 md:px-10">
@@ -215,7 +247,11 @@ export default function DigitalHealthPage() {
                 <span className="font-accent text-[clamp(36px,5vw,54px)] font-extrabold leading-none text-light-yellow">
                   {s.value}
                 </span>
-                <span className="text-[13px] font-medium text-white/60">{s.label}</span>
+                {/*
+                  FIX: Bumped from text-white/60 to text-white/70 for better contrast ratio.
+                  white/60 on navy often falls below the 4.5:1 WCAG AA threshold for small text.
+                */}
+                <span className="text-[13px] font-medium text-white/70">{s.label}</span>
               </div>
             ))}
           </div>
@@ -225,9 +261,15 @@ export default function DigitalHealthPage() {
           <div className="w-full py-20 md:py-28">
 
             <div className="mb-12">
-              <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">
+              {/*
+                FIX: Changed from <p> to <span> — this was a decorative label sitting
+                above an <h2>, so it shouldn't be a block-level paragraph that implies
+                it's a peer of the heading. Using a <span> with display:block avoids
+                creating a misleading document outline.
+              */}
+              <span className="block text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">
                 Platform capabilities
-              </p>
+              </span>
               <h2 className="mt-3 font-body text-[clamp(32px,4vw,48px)] font-extrabold leading-[1.05] text-black">
                 Everything your team needs,<br className="hidden md:block" />
                 <b className="font-accent italic"> in one place</b>
@@ -255,7 +297,11 @@ export default function DigitalHealthPage() {
                     <h3 className={`font-body text-[16px] font-extrabold leading-[1.2] mb-2 ${i === 0 ? 'text-white' : 'text-black'}`}>
                       {f.title}
                     </h3>
-                    <p className={`text-[14px] leading-[1.6] ${i === 0 ? 'text-white/70' : 'text-black/60'}`}>
+                    {/*
+                      FIX: Bumped from text-white/70 → text-white/80 on navy card (i===0)
+                      to improve contrast. /70 white on navy is borderline failing.
+                    */}
+                    <p className={`text-[14px] leading-[1.6] ${i === 0 ? 'text-white/80' : 'text-black/60'}`}>
                       {f.description}
                     </p>
                   </div>
@@ -265,12 +311,13 @@ export default function DigitalHealthPage() {
 
           </div>
         </section>
+
         {/* ── INTERACTIVE DEMO ── */}
         <section id="interactive-demo" className="bg-ice-blue px-6 py-20 md:px-10 md:py-24">
           <div className="mx-auto max-w-content">
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">Try it yourself</p>
+                <span className="block text-[13px] font-bold uppercase tracking-[0.1em] text-black/40">Try it yourself</span>
                 <h2 className="mt-3 font-body text-[clamp(30px,4vw,44px)] font-extrabold leading-[1.05] text-black">
                   Interactive <b className="font-accent italic">Demo</b>
                 </h2>
@@ -278,7 +325,6 @@ export default function DigitalHealthPage() {
                   Walk through real provider workflows—from patient onboarding to clinical data access—without signing up.
                 </p>
               </div>
-
             </div>
             <div className="overflow-hidden rounded-[20px] border border-navy/10 bg-white shadow-sm">
               <SupademoEmbed demoId="cmo0a8tzk0fpm8v9xkn506tbn" title="Digital Health Product Demo" />
@@ -291,7 +337,7 @@ export default function DigitalHealthPage() {
         <section className="bg-navy px-6 py-20 md:px-10 md:py-24">
           <div className="mx-auto max-w-content">
             <div className="mb-14">
-              <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-white/40">Onboarding</p>
+              <span className="block text-[13px] font-bold uppercase tracking-[0.1em] text-white/60">Onboarding</span>
               <h2 className="mt-3 font-body text-[clamp(30px,4vw,44px)] font-extrabold leading-[1.05] text-white">
                 Getting started is <b className="font-accent italic text-light-yellow">simple</b>
               </h2>
@@ -307,7 +353,8 @@ export default function DigitalHealthPage() {
                   </span>
                   <div>
                     <h3 className="font-body text-[16px] font-extrabold text-white mb-2">{step.title}</h3>
-                    <p className="text-[14px] leading-[1.65] text-white/55">{step.desc}</p>
+                    {/* FIX: Bumped from text-white/55 → text-white/70 for WCAG AA compliance */}
+                    <p className="text-[14px] leading-[1.65] text-white/70">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -335,13 +382,15 @@ export default function DigitalHealthPage() {
         <section className="mx-auto max-w-content px-6 py-20 md:px-10">
           <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden rounded-bl-[10px] rounded-br-[120px] rounded-tl-[120px] rounded-tr-[10px] bg-salmon-red px-6 py-16 text-center md:min-h-[420px] md:rounded-br-[200px] md:rounded-tl-[200px] md:px-16">
             <div className="relative z-10 mx-auto max-w-[700px]">
-              <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/70">
+              {/* FIX: Bumped from text-white/70 → text-white/80 */}
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/80">
                 Ready to transform your operations?
               </p>
               <h2 className="font-body text-[clamp(28px,4vw,52px)] font-extrabold leading-[1.1] text-white">
                 Start with <b className="text-light-yellow">Digital Health</b> today
               </h2>
-              <p className="mx-auto mt-5 max-w-[520px] text-[15px] font-medium leading-[1.65] text-white/75">
+              {/* FIX: Bumped from text-white/75 → text-white/85 */}
+              <p className="mx-auto mt-5 max-w-[520px] text-[15px] font-medium leading-[1.65] text-white/85">
                 Join hospitals and clinics already using OneClickMed to deliver faster, smarter, more connected care.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
