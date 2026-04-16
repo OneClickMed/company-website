@@ -2,6 +2,13 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { defaultDescription, defaultOgImage, defaultTitle, siteName, siteUrl } from '@/lib/seo'
 import './globals.css'
+import localFont from 'next/font/local'
+
+const operatta = localFont({
+  src: '../public/Operetta Medium/fonnts.com-operetta8-demibolditalic.otf',
+  display: 'swap',
+  variable: '--font-operatta-8',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -68,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={operatta.variable}>
       <body>
         {children}
         <Script

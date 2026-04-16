@@ -217,21 +217,15 @@ export default function DigitalHealthPage() {
 
               {/* Main image */}
               <div className="relative z-10 rounded-[24px] p-4">
-                {/*
-                  FIX 1: Added explicit width + height to eliminate CLS (Cumulative Layout Shift).
-                          The browser now reserves space before the image loads.
-                  FIX 2: fetchpriority="high" tells the browser this is the LCP image —
-                          load it first, before other resources.
-                  FIX 3: loading="eager" prevents lazy-loading on the above-the-fold hero image.
-                  NOTE:   Swap this for Next.js <Image> with priority prop if you move to that component.
-                */}
+           
                 <Image
   src="/hero_doctors.png"
   alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
   width={600}
   height={450}
   quality={70}
-  priority
+  preload
+  fetchPriority='high'
   className="w-full rounded-[14px]"
 />
               </div>
