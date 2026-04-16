@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const stats = [
   {
     metric: '45%',
@@ -8,7 +10,7 @@ const stats = [
     cardClass: 'rounded-[10px] rounded-br-[120px] bg-cobalt text-white md:rounded-br-[220px]',
     contentClass: 'max-w-[320px] text-left md:ml-auto md:max-w-[300px] md:text-right md:group-hover/card:max-w-[440px]',
     descClass: 'text-white/85 md:mr-auto md:max-w-[300px] md:text-left',
-    imageClass: 'bottom-0 left-5 w-[350px] max-w-none rounded-b-none md:left-8 md:w-[400px] lg:w-[460px]',
+    imageClass: 'bottom-0 left-5 w-[350px] max-w-none md:left-8 md:w-[400px] lg:w-[460px]',
   },
   {
     metric: '55%',
@@ -19,7 +21,7 @@ const stats = [
     cardClass: 'rounded-[10px] rounded-tl-[120px] bg-iceblue text-black md:rounded-tl-[340px]',
     contentClass: 'ml-auto max-w-[250px] text-right md:mt-auto md:ml-0 md:max-w-[240px] md:text-left md:group-hover/card:max-w-[320px]',
     descClass: 'text-black/70',
-    imageClass: 'bottom-0 -right-5 h-[62%] w-auto max-w-none rounded-b-none md:-right-32 md:h-[82%]',
+    imageClass: 'bottom-0 -right-5 h-[62%] w-[220px] max-w-none md:-right-32 md:h-[82%] md:w-[260px]',
   },
   {
     metric: '80%',
@@ -30,7 +32,7 @@ const stats = [
     cardClass: 'rounded-[10px] rounded-bl-[120px] bg-navy text-white md:rounded-bl-[220px]',
     contentClass: 'max-w-[320px] text-left md:max-w-[260px] md:group-hover/card:max-w-[360px]',
     descClass: 'text-white/85 md:max-w-[330px]',
-    imageClass: 'bottom-0 left-6 h-[58%] w-auto max-w-none rounded-b-none md:-right-40 md:left-auto md:h-[92%]',
+    imageClass: 'bottom-0 left-6 h-[58%] w-[220px] max-w-none md:left-auto md:-right-40 md:h-[92%] md:w-[260px]',
   },
 ]
 
@@ -48,16 +50,25 @@ export default function Stats() {
                 <span>{stat.metric}</span> {stat.text}
               </h2>
 
-              <p className={`mt-4 font-body text-[13px] font-semibold leading-[1.35] md:text-[16px] md:leading-[1.45] md:opacity-0 md:transition-opacity md:duration-300 md:group-hover/card:opacity-100 ${stat.descClass}`}>
+              <p
+                className={`mt-4 font-body text-[13px] font-semibold leading-[1.35] md:text-[16px] md:leading-[1.45] md:opacity-0 md:transition-opacity md:duration-300 md:group-hover/card:opacity-100 ${stat.descClass}`}
+              >
                 {stat.desc}
               </p>
             </div>
 
-            <img
-              src={stat.img}
-              alt={stat.imgAlt}
-              className={`absolute z-10 rounded-[22px] object-contain object-bottom ${stat.imageClass}`}
-            />
+            <div className={`absolute z-10 ${stat.imageClass}`}>
+              <div className="relative h-full w-full">
+                <Image
+                  src={stat.img}
+                  alt={stat.imgAlt}
+                  fill
+                  quality={70}
+                  className="object-contain object-bottom"
+                  sizes="(max-width: 768px) 70vw, 33vw"
+                />
+              </div>
+            </div>
           </article>
         ))}
       </div>

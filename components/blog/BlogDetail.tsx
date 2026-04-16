@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import posthog from 'posthog-js'
+import Image from 'next/image'
+
 import {
   formatDate,
   getArticleBySlug,
@@ -105,11 +107,16 @@ export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
               </div>
             </div>
 
+
             {article.coverImage ? (
-              <img
+              <Image
                 src={article.coverImage}
                 alt={article.title}
+                width={1200}
+                height={700}
+                quality={70}
                 className="mt-10 h-[360px] w-full rounded-[28px] object-cover md:h-[560px]"
+                sizes="(max-width: 768px) 100vw, 1200px"
               />
             ) : null}
 

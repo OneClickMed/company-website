@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 
 type ProductKey = 'digital' | 'beta'
@@ -40,20 +41,6 @@ const HeartIcon = () => (
 const MsgIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
     <path d="M3 20.3V5C3 3.9 3.9 3 5 3H19C20.1 3 21 3.9 21 5V15C21 16.1 20.1 17 19 17H8C7.4 17 6.8 17.3 6.4 17.8L4.1 20.7C3.7 21.1 3 20.9 3 20.3Z" stroke="currentColor" strokeWidth="1.7" />
-  </svg>
-)
-
-const DigitalLogoIcon = () => (
-  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
-    <path d="M5 15.5C5 9.8 9.8 5 15.5 5H19v3.5C19 14.2 14.2 19 8.5 19H5v-3.5Z" stroke="currentColor" strokeWidth="1.8" />
-    <path d="M5.5 18.5L15 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-  </svg>
-)
-
-const BetaLogoIcon = () => (
-  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
-    <path d="M12 21S4 16.6 4 9.9C4 6.6 6.5 4 9.7 4C11 4 12 4.6 12 4.6S13 4 14.3 4C17.5 4 20 6.6 20 9.9C20 16.6 12 21 12 21Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-    <path d="M8.2 10.8H10.7L12 8.4L13.6 13.9L15 10.8H17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
@@ -126,16 +113,78 @@ const products = {
   features: Array<{ icon: JSX.Element; text: string }>
 }>
 
+function ProductLogo({ src, alt }: { src: string; alt: string }) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={260}
+      height={48}
+      className="h-auto max-h-12 w-auto max-w-[260px]"
+    />
+  )
+}
+
+function ProductMobileImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string
+  alt: string
+  className: string
+}) {
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        width={1024}
+        height={1024}
+        quality={70}
+        className="h-auto w-full object-contain"
+        sizes="(max-width: 1024px) 100vw, 0px"
+      />
+    </div>
+  )
+}
+
+function ProductDesktopImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string
+  alt: string
+  className: string
+}) {
+  return (
+    <div className={`absolute overflow-hidden ${className}`}>
+      <div className="relative h-full w-full min-h-[420px]">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          quality={70}
+          className="object-contain object-bottom"
+          sizes="(max-width: 1024px) 0px, 40vw"
+        />
+      </div>
+    </div>
+  )
+}
+
 export default function Products() {
   const [activeTab, setActiveTab] = useState<ProductKey>('digital')
   const product = products[activeTab]
+
   const sideCards = (
     <aside className="grid grid-cols-1 gap-5">
-      <div className={`${product.tint} min-h-[245px] rounded-[16px] rounded-tr-[150px] p-8 flex flex-col items-center justify-center text-center`}>
+      <div className={`${product.tint} flex min-h-[245px] flex-col items-center justify-center rounded-[16px] rounded-tr-[150px] p-8 text-center`}>
         <div className="font-accent text-[clamp(56px,7vw,82px)] leading-none text-black">{product.stat}</div>
         <p className="mt-5 max-w-[240px] text-[16px] leading-[1.25] text-black">{product.statText}</p>
       </div>
-      <div className={`${product.tint} min-h-[245px] rounded-[16px] p-8 flex items-center justify-center text-center`}>
+      <div className={`${product.tint} flex min-h-[245px] items-center justify-center rounded-[16px] p-8 text-center`}>
         <p className="max-w-[250px] text-[16px] leading-[1.35] text-black">{product.summary}</p>
       </div>
     </aside>
@@ -152,6 +201,7 @@ export default function Products() {
           {(['digital', 'beta'] as const).map((tab) => {
             const isActive = activeTab === tab
             const activeBg = tab === 'digital' ? 'bg-light-yellow' : 'bg-blush-pink'
+
             return (
               <button
                 key={tab}
@@ -171,19 +221,24 @@ export default function Products() {
 
           <article className="relative min-h-[540px] overflow-hidden rounded-[16px] bg-navy p-10 text-white md:p-14">
             <div className={`absolute rounded-full ${product.bubbleClass} ${product.bubblePosition}`} />
+
             <div className={`relative z-10 ${product.contentClass}`}>
               <p className="mb-5 text-[15px] font-extrabold uppercase tracking-[0.06em] text-light-yellow">
                 {product.eyebrow}
               </p>
+
               <div className="mb-5">
-                <img
-                  src={product.logo}
-                  alt={`${product.title} logo`}
-                  className="h-auto max-h-12 w-auto max-w-[260px]"
-                />
+                <ProductLogo src={product.logo} alt={`${product.title} logo`} />
               </div>
-              <p className="mb-8 text-base font-extrabold leading-[1.45] text-white">{product.subtitle}</p>
-              <p className="mb-9 text-[17px] leading-[1.55] text-white/85">{product.description}</p>
+
+              <p className="mb-8 text-base font-extrabold leading-[1.45] text-white">
+                {product.subtitle}
+              </p>
+
+              <p className="mb-9 text-[17px] leading-[1.55] text-white/85">
+                {product.description}
+              </p>
+
               <ul className="flex flex-col gap-4 text-[17px] text-white">
                 {product.features.map((feature) => (
                   <li key={feature.text} className="flex items-center gap-4">
@@ -192,6 +247,7 @@ export default function Products() {
                   </li>
                 ))}
               </ul>
+
               {activeTab === 'beta' ? (
                 <Link
                   href="/beta-health"
@@ -207,9 +263,19 @@ export default function Products() {
                   Explore Digital Health
                 </Link>
               )}
-              <img src={product.image} alt={product.imageAlt} className={product.mobileImageClass} />
+
+              <ProductMobileImage
+                src={product.image}
+                alt={product.imageAlt}
+                className={product.mobileImageClass}
+              />
             </div>
-            <img src={product.image} alt={product.imageAlt} className={product.imageClass} />
+
+            <ProductDesktopImage
+              src={product.image}
+              alt={product.imageAlt}
+              className={product.imageClass}
+            />
           </article>
 
           {activeTab === 'digital' && sideCards}

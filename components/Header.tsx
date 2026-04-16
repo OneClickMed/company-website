@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import posthog from 'posthog-js'
 
 export default function Header() {
@@ -10,12 +11,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-navy/[0.08]">
       <div className="mx-auto flex h-[72px] max-w-content items-center justify-between gap-6 px-6 md:px-10">
-        {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img src="/Logo.svg" alt="OneClickMed" className="h-10 w-auto" />
+          <Image
+            src="/Logo.svg"
+            alt="OneClickMed"
+            width={160}
+            height={40}
+            priority
+            className="h-10 w-auto"
+          />
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-2">
           <div className="relative" onMouseEnter={() => setProductsOpen(true)} onMouseLeave={() => setProductsOpen(false)}>
             <button className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all flex items-center gap-1">
@@ -36,7 +42,6 @@ export default function Header() {
           <Link href="/#contact" className="font-body text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue hover:text-navy transition-all">Contact</Link>
         </nav>
 
-        {/* CTA */}
         <Link
           href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
           target="_blank"
@@ -47,7 +52,6 @@ export default function Header() {
           Book a Demo
         </Link>
 
-        {/* Mobile toggle */}
         <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="var(--navy-blue)" strokeWidth="2" strokeLinecap="round"/>
@@ -55,7 +59,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-navy/[0.08] px-5 py-4 flex flex-col gap-2 bg-white">
           {[

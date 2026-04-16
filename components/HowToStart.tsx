@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const providerSteps = [
   'Contact Sales & Book a Demo',
@@ -29,18 +30,28 @@ export default function HowToStart() {
               Getting started is <b className="font-accent italic text-black">simple</b>.
             </h2>
           </div>
-                    <p className="max-w-[520px] font-body text-[17px] font-medium leading-[1.45] text-black md:mt-6 md:justify-self-end">
+          <p className="max-w-[520px] font-body text-[17px] font-medium leading-[1.45] text-black md:mt-6 md:justify-self-end">
             OneClick-Med makes connection effortless, ensuring providers and patients always have access to the information they need.
           </p>
 
         </div>
 
         <div className="mt-16 grid grid-cols-1 items-start gap-12 md:grid-cols-[0.82fr_1fr] md:gap-[120px]">
+
+
+
+
+
+
           <div className="flex justify-center md:justify-start">
-            <img
+            <Image
               src="/get-started-phone-861x1024.png"
               alt="Get Started"
-              className="w-full max-w-[450px]"
+              width={861}
+              height={1024}
+              quality={70}
+              className="h-auto w-full max-w-[450px]"
+              sizes="(max-width: 768px) 100vw, 450px"
             />
           </div>
 

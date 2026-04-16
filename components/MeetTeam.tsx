@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
 type TeamMember = {
@@ -25,8 +26,7 @@ const teamMembers: TeamMember[] = [
     accent: 'bg-light-yellow',
     frameClass: 'rounded-tl-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-[64px]',
     cardTint: 'bg-[#fffef5]',
-    image:
-      '',
+    image: '',
   },
   {
     name: 'Ajomale Wale',
@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
     accent: 'bg-cobalt',
     frameClass: 'rounded-tl-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-[64px]',
     cardTint: 'bg-[#f5f8ff]',
-    image: ""
+    image: '',
   },
   {
     name: 'Kingsley Usuro',
@@ -101,11 +101,16 @@ function TeamPortrait({
   return (
     <div className={`relative h-[310px] overflow-hidden ${accent} ${frameClass}`}>
       {image ? (
-        <img
-          src={image}
-          alt={name}
-          className="absolute inset-x-0 bottom-0 mx-auto h-[292px] w-[88%] rounded-t-[26px] object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-        />
+        <div className="absolute inset-x-0 bottom-0 mx-auto h-[292px] w-[88%] overflow-hidden rounded-t-[26px]">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            quality={70}
+            className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+            sizes="330px"
+          />
+        </div>
       ) : null}
     </div>
   )
@@ -120,9 +125,10 @@ export default function MeetTeam() {
     if (!track) return
 
     const updateProgress = () => {
-      const cardWidth = track.firstElementChild instanceof HTMLElement
-        ? track.firstElementChild.offsetWidth + 16
-        : 1
+      const cardWidth =
+        track.firstElementChild instanceof HTMLElement
+          ? track.firstElementChild.offsetWidth + 16
+          : 1
       setActiveIndex(Math.min(teamMembers.length - 1, Math.round(track.scrollLeft / cardWidth)))
     }
 
@@ -144,8 +150,7 @@ export default function MeetTeam() {
             Meet Our Team
           </p>
           <h2 className="mt-3 font-body text-[clamp(26px,3.5vw,40px)] font-extrabold leading-[1.08] tracking-[-0.03em] text-black">
-            The people building{' '}
-            <span className="font-accent italic">OneClickMed</span>
+            The people building <span className="font-accent italic">OneClickMed</span>
           </h2>
           <p className="mt-3 max-w-[480px] font-body text-[14px] font-medium leading-[1.55] text-black/50">
             Changing healthcare one click at a time.

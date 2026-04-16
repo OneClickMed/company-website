@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { absoluteUrl, siteName } from '@/lib/seo'
 import SupademoEmbed from '@/components/SupademoEmbed'
+import Image from 'next/image'
 
 
 export const metadata: Metadata = {
@@ -224,15 +225,15 @@ export default function DigitalHealthPage() {
                   FIX 3: loading="eager" prevents lazy-loading on the above-the-fold hero image.
                   NOTE:   Swap this for Next.js <Image> with priority prop if you move to that component.
                 */}
-                <img
-                  src="/hero_doctors.png"
-                  alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
-                  width={600}
-                  height={450}
-                  fetchPriority="high"
-                  loading="eager"
-                  className="w-full rounded-[14px]"
-                />
+                <Image
+  src="/hero_doctors.png"
+  alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
+  width={600}
+  height={450}
+  quality={70}
+  priority
+  className="w-full rounded-[14px]"
+/>
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import posthog from 'posthog-js'
 
@@ -43,18 +44,13 @@ const socialLinks = [
 
 export default function Footer() {
   const [email, setEmail] = useState('')
+
   const resourceLinks = [
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Terms of Service', href: '/terms-condition' },
     { label: 'Frequently Asked Questions', href: '/#faq' },
   ]
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      posthog.capture('newsletter_subscribed', { email_domain: email.split('@')[1] ?? '' })
-    }
-  }
   const quickLinks = [
     { label: 'About', href: '/#about' },
     { label: 'Resources', href: '/resources' },
@@ -63,94 +59,122 @@ export default function Footer() {
     { label: 'Contact', href: '/#contact' },
   ]
 
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email) {
+      posthog.capture('newsletter_subscribed', {
+        email_domain: email.split('@')[1] ?? '',
+      })
+    }
+  }
+
   return (
-    <footer className="bg-navy px-10 pt-16 pb-10 text-white/70">
+    <footer className="bg-navy px-10 pb-10 pt-16 text-white/70">
       <div className="mx-auto max-w-content">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 pb-12 border-b border-white/10">
-          {/* Brand */}
+        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
-            <img src="/Logo White.svg" alt="OneClickMed" className="h-10 w-auto" />
-            <p className="text-sm leading-[1.7] my-4 max-w-[300px]">
+            <Image
+              src="/Logo White.svg"
+              alt="OneClickMed"
+              width={160}
+              height={40}
+              className="h-10 w-auto"
+            />
+            <p className="my-4 max-w-[300px] text-sm leading-[1.7]">
               Be the first to hear about new features, product releases, and digital health updates from OneClick-Med.
             </p>
-            <form className="flex gap-2 max-w-[320px]" onSubmit={handleNewsletterSubmit}>
+            <form className="flex max-w-[320px] gap-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Email Address"
-                className="flex-1 px-3.5 py-2.5 rounded-md border border-white/15 bg-white/[0.08] text-white text-sm placeholder-white/40 focus:outline-none focus:border-salmon-red font-body"
+                className="flex-1 rounded-md border border-white/15 bg-white/[0.08] px-3.5 py-2.5 font-body text-sm text-white placeholder-white/40 focus:border-salmon-red focus:outline-none"
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-[6px] bg-salmon-red text-white text-sm font-semibold whitespace-nowrap font-body hover:bg-salmon-red transition-colors"
+                className="whitespace-nowrap rounded-[6px] bg-salmon-red px-4 py-2.5 font-body text-sm font-semibold text-white transition-colors hover:bg-salmon-red"
               >
                 Subscribe
               </button>
             </form>
           </div>
 
-          {/* Resources */}
           <div>
-            <h4 className="font-body text-sm font-bold text-white mb-4 tracking-[0.02em]">Resources</h4>
+            <p className="mb-4 font-body text-sm font-bold tracking-[0.02em] text-white">
+              Resources
+            </p>
             <ul className="flex flex-col gap-2.5">
               {resourceLinks.map(item => (
                 <li key={item.label}>
-                  <Link href={item.href} className="text-sm text-white/60 hover:text-white transition-colors">{item.label}</Link>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-body text-sm font-bold text-white mb-4 tracking-[0.02em]">Contact Us</h4>
+            <p className="mb-4 font-body text-sm font-bold tracking-[0.02em] text-white">
+              Contact Us
+            </p>
             <div className="flex flex-col gap-3">
-              <div className="flex gap-2 items-start text-[13px]">
+              <div className="flex items-start gap-2 text-[13px]">
                 <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" className="mt-0.5 flex-shrink-0 text-white/50">
                   <path d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z"/>
                 </svg>
                 <div>
-                  <div className="text-[11px] font-semibold text-white/80 mb-0.5">Address</div>
+                  <div className="mb-0.5 text-[11px] font-semibold text-white/80">Address</div>
                   Plot 901, Katampe, Federal Capital Territory, Abuja, Nigeria
                 </div>
               </div>
-              <div className="flex gap-2 items-start text-[13px]">
+
+              <div className="flex items-start gap-2 text-[13px]">
                 <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" className="mt-0.5 flex-shrink-0 text-white/50">
                   <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/>
                 </svg>
                 <div>
-                  <div className="text-[11px] font-semibold text-white/80 mb-0.5">Phone</div>
+                  <div className="mb-0.5 text-[11px] font-semibold text-white/80">Phone</div>
                   (+234) 813 836 4425
                 </div>
               </div>
-              <div className="flex gap-2 items-start text-[13px]">
+
+              <div className="flex items-start gap-2 text-[13px]">
                 <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" className="mt-0.5 flex-shrink-0 text-white/50">
                   <path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/>
                 </svg>
                 <div>
-                  <div className="text-[11px] font-semibold text-white/80 mb-0.5">Email</div>
+                  <div className="mb-0.5 text-[11px] font-semibold text-white/80">Email</div>
                   info@oneclickmed.com
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="font-body text-sm font-bold text-white mb-4 tracking-[0.02em]">Quick Links</h4>
+            <p className="mb-4 font-body text-sm font-bold tracking-[0.02em] text-white">
+              Quick Links
+            </p>
             <ul className="flex flex-col gap-2.5">
               {quickLinks.map(item => (
                 <li key={item.label}>
-                  <Link href={item.href} className="text-sm text-white/60 hover:text-white transition-colors">{item.label}</Link>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
           <p className="text-[13px]">© 2026 OneClickMed. All Rights Reserved.</p>
           <div className="flex gap-2">
             {socialLinks.map((social) => (
@@ -161,7 +185,9 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={`Visit OneClickMed on ${social.label}`}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.08] transition-all hover:border-salmon-red hover:bg-salmon-red"
-                onClick={() => posthog.capture('social_link_clicked', { platform: social.label })}
+                onClick={() =>
+                  posthog.capture('social_link_clicked', { platform: social.label })
+                }
               >
                 <svg className="h-3.5 w-3.5 fill-white" viewBox={social.icon.props.viewBox}>
                   {social.icon.props.children}

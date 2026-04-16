@@ -4,6 +4,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DownloadButtons from '@/components/DownloadButtons'
 import { absoluteUrl, siteName } from '@/lib/seo'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Beta Health',
@@ -353,37 +354,42 @@ export default function BetaHealthPage() {
         </div>
 
         <div className="overflow-hidden rounded-[20px] rounded-br-[100px] md:rounded-br-[140px]">
-          <div className="people-carousel">
-            <div className="people-carousel-track">
-              {peopleSlides.map((slide) => (
-                <div
-                  key={slide.image}
-                  className="people-slide relative h-[280px] overflow-hidden rounded-[20px] rounded-br-[100px] md:h-[380px] md:rounded-br-[140px]"
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.alt}
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                  />
+<div className="overflow-hidden rounded-[20px] rounded-br-[100px] md:rounded-br-[140px]">
+  <div className="people-carousel">
+    <div className="people-carousel-track">
+      {peopleSlides.map((slide) => (
+        <div
+          key={slide.image}
+          className="people-slide relative h-[280px] overflow-hidden rounded-[20px] rounded-br-[100px] md:h-[380px] md:rounded-br-[140px]"
+        >
+          <Image
+            src={slide.image}
+            alt={slide.alt}
+            fill
+            quality={70}
+            className="object-cover object-center"
+            sizes="(max-width: 768px) 100vw, 380px"
+          />
 
-                  {/* Slightly darker, more stable text overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-transparent" />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-transparent" />
 
-                  {/* Overlay content */}
-                  <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-7 md:pb-7">
-                    <div className="max-w-[78%] md:max-w-[72%]">
-                      <p className="text-[clamp(18px,1.5vw,24px)] font-semibold leading-[1.15] tracking-[-0.02em] text-white">
-                        {slide.title}
-                      </p>
-                      <p className="mt-2 text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.45] text-white">
-                        {slide.copy}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          {/* Content */}
+          <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-7 md:pb-7">
+            <div className="max-w-[78%] md:max-w-[72%]">
+              <p className="text-[clamp(18px,1.5vw,24px)] font-semibold leading-[1.15] tracking-[-0.02em] text-white">
+                {slide.title}
+              </p>
+              <p className="mt-2 text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.45] text-white">
+                {slide.copy}
+              </p>
             </div>
           </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
       </div>
 
