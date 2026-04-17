@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import { absoluteUrl, siteName } from '@/lib/seo'
 import SupademoEmbed from '@/components/SupademoEmbed'
 import Image from 'next/image'
+import FAQ from '@/components/FAQ'
 
 
 export const metadata: Metadata = {
@@ -99,6 +100,34 @@ const steps = [
   { num: '03', title: 'Training & 24/7 Support', desc: 'Your team is onboarded with hands-on training and ongoing expert support.' },
 ]
 
+const digitalHealthFaqs = [
+  {
+    question: 'Is the Digital Health EHR suitable for small clinics and large hospitals?',
+    answer:
+      'Yes. Our Digital Health EHR is designed to support healthcare facilities of all sizes, from small clinics to large hospitals and multi-branch systems.',
+  },
+  {
+    question: 'Can the Digital Health EHR work without internet access?',
+    answer:
+      'Yes. The Digital Health EHR can be used offline and automatically syncs your data once internet access is restored.',
+  },
+  {
+    question: 'How does the Digital Health EHR improve healthcare delivery?',
+    answer:
+      'By connecting patient records, departments, and care processes in one system, the Digital Health EHR helps reduce delays, improve coordination, and support better clinical decision-making.',
+  },
+  {
+    question: 'Does the Digital Health EHR connect with the Beta Health App?',
+    answer:
+      'Yes. The Digital Health EHR integrates with the Beta Health App to support smooth interaction between healthcare providers and individuals, including record access and appointment management.',
+  },
+  {
+    question: 'How do I get started with the Digital Health EHR?',
+    answer:
+      'You can get started by booking a demo with our team to explore features and find the right setup for your facility.',
+  },
+]
+
 export default function DigitalHealthPage() {
   const productSchema = {
     '@context': 'https://schema.org',
@@ -156,7 +185,7 @@ export default function DigitalHealthPage() {
               */}
               <h1 className="mt-5 font-body text-[clamp(38px,5.2vw,68px)] font-extrabold leading-[1.02] text-black">
                 Digital{' '}
-                <b className="font-accent italic text-navy">Health</b>
+                <b className="font-accent italic text-navy">Health EHR</b>
                 {' '}Platform
               </h1>
 
@@ -374,6 +403,18 @@ export default function DigitalHealthPage() {
             </div>
           </div>
         </section>
+
+        <FAQ
+          sectionId="faq-digital-health"
+          eyebrow="FAQ"
+          title={
+            <>
+              FAQ  - <b className="font-accent italic text-black">Digital Health EHR</b>
+            </>
+          }
+          description="Answers to common questions about Digital Health EHR and how it supports healthcare facilities."
+          faqs={digitalHealthFaqs}
+        />
 
         {/* ── CTA ── */}
         <section className="mx-auto max-w-content px-6 py-20 md:px-10">

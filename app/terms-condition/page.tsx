@@ -38,7 +38,7 @@ export default function TermsConditionPage() {
             <h2 className="mb-3 text-xl font-semibold text-blue-dark">1. Agreement to Terms</h2>
             <p className="leading-relaxed">
               These Terms &amp; Conditions (&quot;Terms&quot;) govern your access to and use of the
-              OneClick-Med website (www.oneclickmed.ng) and related services, applications, and platforms
+              OneClickMed website (www.oneclickmed.ng) and related services, applications, and platforms
               (together, the &quot;Service&quot;). By accessing or using the Service, you agree to be
               bound by these Terms and our Privacy Policy. If you do not agree, please refrain from using
               the Service.
@@ -131,7 +131,7 @@ export default function TermsConditionPage() {
             <h2 className="mb-3 text-xl font-semibold text-blue-dark">7. Intellectual Property</h2>
             <div className="space-y-3">
               <p className="leading-relaxed">
-                <span className="font-medium">Our Rights:</span> OneClick-Med and its licensors own all
+                <span className="font-medium">Our Rights:</span> OneClickMed and its licensors own all
                 rights, title, and interest in the Service, including software, content, trademarks, and
                 logos.
               </p>
@@ -181,7 +181,7 @@ export default function TermsConditionPage() {
               </p>
               <p className="leading-relaxed">
                 <span className="font-medium">Limitation of Liability:</span> To the maximum extent
-                permitted by law, OneClick-Med&apos;s total liability for any claim arising out of or
+                permitted by law, OneClickMed&apos;s total liability for any claim arising out of or
                 relating to these Terms or the Service will not exceed the fees you paid in the prior 12
                 months. We are not liable for indirect, incidental, special, or consequential damages.
               </p>
@@ -191,7 +191,7 @@ export default function TermsConditionPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-blue-dark">11. Indemnification</h2>
             <p className="leading-relaxed">
-              You agree to indemnify and hold OneClick-Med, its affiliates, officers, directors,
+              You agree to indemnify and hold OneClickMed, its affiliates, officers, directors,
               employees, and agents harmless from any claim, loss, liability, damages, or expenses
               (including legal fees) arising from your use of the Service, violation of these Terms, or
               infringement of any rights.
@@ -239,7 +239,7 @@ export default function TermsConditionPage() {
               <p className="leading-relaxed">
                 <span className="font-medium">Entire Agreement:</span> These Terms, together with the
                 Privacy Policy and any documents they incorporate, constitute the entire agreement between
-                you and OneClick-Med regarding the Service.
+                you and OneClickMed regarding the Service.
               </p>
             </div>
           </section>
@@ -271,7 +271,7 @@ export default function TermsConditionPage() {
 
           <div className="border-t pt-6">
             <p className="text-sm">
-              By using OneClick-Med, you acknowledge that you have read, understood, and agree to these
+              By using OneClickMed, you acknowledge that you have read, understood, and agree to these
               Terms &amp; Conditions.
             </p>
           </div>

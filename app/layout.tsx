@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
   keywords: [
     'OneClickMed',
-    'digital health',
+    'digital health ehr',
     'EHR',
     'telemedicine',
     'healthcare interoperability',

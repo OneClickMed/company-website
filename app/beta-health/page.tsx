@@ -6,6 +6,7 @@ import DownloadButtons from '@/components/DownloadButtons'
 import BetaTotalCareCards from '@/components/BetaTotalCareCards'
 import { absoluteUrl, siteName } from '@/lib/seo'
 import Image from 'next/image'
+import FAQ from '@/components/FAQ'
 
 export const metadata: Metadata = {
   title: 'Beta Health',
@@ -153,6 +154,34 @@ const perks = [
   'Works offline when connectivity is limited',
   'Accepted at partnered hospitals nationwide',
   'Family accounts for premium users',
+]
+
+const betaHealthFaqs = [
+  {
+    question: 'Can I connect my hospital or clinic through the Beta Health App?',
+    answer:
+      'Yes. The Beta Health App allows individuals to connect with healthcare providers and facilities for better access to care and health management.',
+  },
+  {
+    question: 'Can I find hospitals and clinics on the Beta Health App?',
+    answer:
+      'Yes. The Beta Health App helps you discover and connect with healthcare facilities based on your needs and location.',
+  },
+  {
+    question: 'Can I access emergency support on the Beta Health App?',
+    answer:
+      'Yes. The Beta Health App provides access to emergency care features to help you reach support when you need it most.',
+  },
+  {
+    question: 'Does the Beta Health App have AI support for health questions?',
+    answer:
+      'Yes. The app includes an AI-powered assistant designed to help answer general health-related questions and guide users.',
+  },
+  {
+    question: 'Can I book teleconsultations on the Beta Health App?',
+    answer:
+      'Yes. Users can access teleconsultation services to connect with healthcare professionals remotely.',
+  },
 ]
 
 export default function BetaHealthPage() {
@@ -406,6 +435,18 @@ export default function BetaHealthPage() {
             </div>
           </div>
         </section>
+
+        <FAQ
+          sectionId="faq-beta-health"
+          eyebrow="FAQ"
+          title={
+            <>
+              FAQ  - <b className="font-accent italic text-black">Beta Health</b>
+            </>
+          }
+          description="Answers to common questions about the Beta Health App and how users can get care support."
+          faqs={betaHealthFaqs}
+        />
 
 
 

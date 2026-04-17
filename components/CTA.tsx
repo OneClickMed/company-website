@@ -5,10 +5,10 @@ export default function CTA() {
         <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-bl-[10px] rounded-br-[120px] rounded-tl-[120px] rounded-tr-[10px] bg-navy px-6 py-20 text-center md:min-h-[560px] md:rounded-br-[220px] md:rounded-tl-[220px] md:px-16">
           <div className="relative z-10 mx-auto max-w-[820px]">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/80 md:text-base">
-              Ready to simplify healthcare operations?
+              Ready to simplify healthcare ?
             </p>
             <h2 className="font-body text-[clamp(30px,4.2vw,56px)] font-extrabold leading-[1.1] text-white">
-              Start with <b className="text-light-yellow">OneClickMed</b> today
+              Choose <b className="text-light-yellow">OneClickMed</b> today
             </h2>
             <p className="mx-auto mt-6 max-w-[620px] text-base font-medium leading-[1.6] text-white/80 md:text-lg">
               Book a demo to explore provider workflows, or download Beta Health to get started now.

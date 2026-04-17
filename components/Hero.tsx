@@ -13,8 +13,7 @@ export default function Hero() {
         One platform. Connected care. Better outcomes.
       </h2>
       <p className="mt-5   max-w-[560px] leading-[1.7]">
-        OneClickMed unifies patient records, reduces admin workload, and enables real-time collaboration
-        across healthcare providers.
+        Our digital health solutions help providers deliver better care, connect patients to healthcare services, and give individuals simple ways to manage their health.
       </p>
       <div className="mt-9 flex w-full max-w-[560px] flex-col items-start gap-3 md:flex-row md:justify-center">
         <Link

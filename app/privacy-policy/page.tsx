@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-blue-dark">1. Introduction</h2>
             <p className="leading-relaxed">
-              OneClick-Med (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to
+              OneClickMed (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to
               protecting the privacy of visitors (&quot;you&quot; or &quot;your&quot;) to our website at
               www.oneclickmed.ng (&quot;Site&quot;) and users of our digital health platform. This Privacy
               Policy explains what information we collect, how we use and share it, and your rights.
@@ -120,7 +120,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="leading-relaxed">
                 <span className="font-medium">Legal Requirements:</span> If required by law, court
-                order, or to protect rights, safety, or property of OneClick-Med, our users, or the
+                order, or to protect rights, safety, or property of OneClickMed, our users, or the
                 public.
               </p>
             </div>
@@ -206,7 +206,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <div className="border-t pt-6">
-            <p className="text-sm">By using OneClick-Med, you consent to this Privacy Policy.</p>
+            <p className="text-sm">By using OneClickMed, you consent to this Privacy Policy.</p>
           </div>
         </div>
       </main>

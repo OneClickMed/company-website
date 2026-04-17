@@ -1,53 +1,79 @@
 'use client'
 
 import posthog from 'posthog-js'
+import type { ReactNode } from 'react'
 
-const faqs = [
+export type FAQItem = {
+  question: string
+  answer: string
+}
+
+const defaultFaqs: FAQItem[] = [
   {
-    question: 'What is OneClick-Med?',
+    question: 'What is OneClickMed?',
     answer:
-      'OneClick-Med is a digital healthcare platform that connects patients, healthcare providers, and medical records through one secure, interoperable system.',
+      'OneClickMed is a healthcare technology company developing digital tools that support healthcare providers and help individuals manage their health.',
   },
   {
-    question: 'Who can use OneClick-Med?',
+    question: 'What are OneClickMed’s products?',
     answer:
-      'The platform is built for patients, hospitals, clinics, healthcare administrators, and care teams that need faster access to accurate health information.',
+      'We build two main digital health solutions: The Digital Health EHR and the Beta Health App.',
   },
   {
-    question: 'What features does OneClick-Med offer?',
+    question: 'Who are OneClickMed’s products designed for?',
     answer:
-      'OneClick-Med supports one-time patient registration, electronic health records, appointment booking, remote consultations, ambulance access, prescription reminders, hospital finder, symptom checks, and health tips.',
+      'The Digital Health EHR is designed for healthcare providers such as hospitals, clinics, pharmacies, and medical practices, while the Beta Health App is designed for individuals managing their personal health.',
   },
   {
-    question: 'How do healthcare providers get started?',
+    question: 'What features does the Digital Health EHR have?',
     answer:
-      'Healthcare providers can contact the sales team to book a demo, complete a feasibility study, and receive implementation support, training, and customer support.',
+      'The Digital Health EHR supports full hospital operations, including patient records, appointments, clinical workflows, billing, insurance, inventory, departmental modules, and connected care through the Beta Health App.',
   },
   {
-    question: 'How do patients get started?',
+    question: 'What features does the Beta Health App have?',
     answer:
-      'Patients can get started by downloading the mobile app, creating an account, and connecting to a hospital or healthcare provider on the platform.',
+      'The Beta Health App includes emergency access, health records management, symptom checking, teleconsultation, hospital finder, prescription reminders, health tips, and AI-powered health support.',
   },
   {
     question: 'How does OneClick-Med protect health data?',
     answer:
-      'OneClick-Med is designed with secure access controls and privacy-focused workflows to help protect sensitive healthcare information across connected care teams.',
+      'Our tools are designed with secure access controls and privacy-focused workflows to help protect sensitive healthcare information across connected care teams.',
   },
 ]
 
-export default function FAQ() {
+type FAQProps = {
+  sectionId?: string
+  eyebrow?: string
+  title?: ReactNode
+  description?: string
+  faqs?: FAQItem[]
+  className?: string
+}
+
+export default function FAQ({
+  sectionId = 'faq',
+  eyebrow = 'FAQ',
+  title = (
+    <>
+      Frequently Asked <b className="font-accent italic text-black">Questions</b>
+    </>
+  ),
+  description = 'Quick answers about OneClickMed, how it works, and how patients and providers can get started.',
+  faqs = defaultFaqs,
+  className = 'bg-ice-blue px-6 py-20 md:px-10 md:py-24',
+}: FAQProps) {
   return (
-    <section id="faq" className="bg-ice-blue px-6 py-20 md:px-10 md:py-24">
+    <section id={sectionId} className={className}>
       <div className="mx-auto max-w-[980px]">
         <div className="mx-auto max-w-[740px] text-left md:text-center">
           <p className="font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black">
-            FAQ
+            {eyebrow}
           </p>
           <h2 className="mt-3 font-body text-[clamp(36px,4.6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.04em] text-black">
-            Frequently Asked <b className="font-accent italic text-black">Questions</b>
+            {title}
           </h2>
           <p className="mt-5 font-body text-[17px] font-medium leading-[1.55] text-black/70">
-            Quick answers about OneClick-Med, how it works, and how patients and providers can get started.
+            {description}
           </p>
         </div>
 
@@ -58,7 +84,7 @@ export default function FAQ() {
               className="group rounded-[18px] bg-white px-6 py-5 shadow-sm transition-all duration-300 open:shadow-brand-menu md:px-8"
               onToggle={(e) => {
                 if ((e.currentTarget as HTMLDetailsElement).open) {
-                  posthog.capture('faq_expanded', { question: faq.question })
+                  posthog.capture('faq_expanded', { question: faq.question, section: sectionId })
                 }
               }}
             >

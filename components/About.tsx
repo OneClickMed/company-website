@@ -12,11 +12,13 @@ export default function About() {
             Who We Are
           </p>
           <h2 className="font-body text-[clamp(36px,4vw,44px)] font-normal leading-[1.08] text-white">
-            Your health data, securely accessible wherever care happens.
+            Simplifying healthcare for providers and individuals
           </h2>
           <p className="mt-5 max-w-[560px] font-body text-[15px] leading-[1.55] text-white">
-            OneClickMed helps providers and patients work from one source of truth, reducing repeated
-            registrations, minimizing delays, and improving continuity of care.
+            OneClickMed is a Nigerian health technology company building digital solutions to improve how healthcare is delivered, accessed, and managed
+          </p>
+          <p className="mt-5 max-w-[560px] font-body text-[15px] leading-[1.55] text-white">
+            Through our platforms, we help reduce repeated registrations, minimize delays in care, and support better continuity across the healthcare system. We also make it easier for individuals to access, track, and manage their health in a more connected and reliable way.
           </p>
         </div>
 

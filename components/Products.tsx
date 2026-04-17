@@ -254,14 +254,14 @@ export default function Products() {
                   href="/beta-health"
                   className="mt-8 inline-flex rounded-[6px] bg-white px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-ice-blue"
                 >
-                  Explore Beta Health
+                  Explore Beta Health App
                 </Link>
               ) : (
                 <Link
                   href="/digital-health"
                   className="mt-8 inline-flex rounded-[6px] bg-white px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-ice-blue"
                 >
-                  Explore Digital Health
+                  Explore Digital Health EHR 
                 </Link>
               )}
 

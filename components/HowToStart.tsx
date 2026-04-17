@@ -47,7 +47,7 @@ export default function HowToStart() {
             </h2>
           </div>
           <p className="max-w-[520px] font-body text-[17px] font-medium leading-[1.45] text-black md:mt-6 md:justify-self-end">
-            OneClick-Med makes connection effortless, ensuring providers and patients always have access to the information they need.
+Start using smarter healthcare tools today. We&apos;re here to guide you every step of the way.
           </p>
 
         </div>
