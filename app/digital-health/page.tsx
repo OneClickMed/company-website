@@ -185,10 +185,11 @@ export default function DigitalHealthPage() {
               */}
               <h1 className="mt-5 font-body text-[clamp(38px,5.2vw,68px)] font-extrabold leading-[1.02] text-black">
                 Digital{' '}
-                <b className="font-accent italic text-navy">Health EHR</b>
-                {' '}Platform
+                <b className="font-accent italic text-navy">Health</b>
+                <br />
+                <b className="font-accent italic text-navy">EHR</b>{' '}
+                Platform
               </h1>
-
               <p className="mt-5 max-w-[560px] text-lg leading-[1.7] text-black/65">
                 A comprehensive provider platform built to centralise records, reduce operational friction,
                 and improve patient outcomes through connected care.
@@ -246,17 +247,17 @@ export default function DigitalHealthPage() {
 
               {/* Main image */}
               <div className="relative z-10 rounded-[24px] p-4">
-           
+
                 <Image
-  src="/hero_doctors.png"
-  alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
-  width={600}
-  height={450}
-  quality={70}
-  preload
-  fetchPriority='high'
-  className="w-full rounded-[14px]"
-/>
+                  src="/hero_doctors.png"
+                  alt="Digital Health provider platform showing unified patient profiles and clinical workflows"
+                  width={600}
+                  height={450}
+                  quality={70}
+                  preload
+                  fetchPriority='high'
+                  className="w-full rounded-[14px]"
+                />
               </div>
             </div>
 
@@ -305,14 +306,14 @@ export default function DigitalHealthPage() {
                 <div
                   key={f.title}
                   className={`rounded-[20px] p-7 flex flex-col gap-4 ${i === 0 ? 'bg-navy text-white' :
-                      i === 1 ? 'bg-light-yellow text-black' :
-                        i === 2 ? 'bg-ice-blue text-black' :
-                          'bg-beige text-black'
+                    i === 1 ? 'bg-light-yellow text-black' :
+                      i === 2 ? 'bg-ice-blue text-black' :
+                        'bg-beige text-black'
                     }`}
                 >
                   <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${i === 0 ? 'bg-white/10 text-white' :
-                      i === 1 ? 'bg-black/10 text-navy' :
-                        'bg-navy/10 text-navy'
+                    i === 1 ? 'bg-black/10 text-navy' :
+                      'bg-navy/10 text-navy'
                     }`}>
                     {f.icon}
                   </div>
@@ -351,10 +352,10 @@ export default function DigitalHealthPage() {
               </div>
             </div>
             <div className="max-w-content mx-auto rounded-[20px] border border-navy/10  p-0 shadow-sm">
-            
+
               <SupademoEmbed demoId="cmo0a8tzk0fpm8v9xkn506tbn" title="Digital Health Product Demo" />
-              </div>
-            
+            </div>
+
           </div>
         </section>
 
