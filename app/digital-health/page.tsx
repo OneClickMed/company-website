@@ -154,7 +154,7 @@ export default function DigitalHealthPage() {
                 and "digital health platform" while keeping the brand name prominent.
                 Previously was just "Digital Health" which is too generic.
               */}
-              <h1 className="mt-5 font-body text-[clamp(54px,7vw,72px)] font-extrabold leading-[1.02] text-black">
+              <h1 className="mt-5 font-body text-[clamp(38px,5.2vw,68px)] font-extrabold leading-[1.02] text-black">
                 Digital{' '}
                 <b className="font-accent italic text-navy">Health</b>
                 {' '}Platform
@@ -188,9 +188,9 @@ export default function DigitalHealthPage() {
             <div className="relative mt-10 lg:mt-0">
               {/* Subtle background rings */}
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <div className="absolute h-[420px] w-[420px] rounded-full border border-navy/10" />
-                <div className="absolute h-[540px] w-[540px] rounded-full border border-navy/5" />
-                <div className="absolute h-[660px] w-[660px] rounded-full border border-navy/5" />
+                <div className="absolute aspect-square w-[clamp(240px,58vw,420px)] rounded-full border border-navy/10" />
+                <div className="absolute aspect-square w-[clamp(300px,72vw,540px)] rounded-full border border-navy/5" />
+                <div className="absolute aspect-square w-[clamp(360px,86vw,660px)] rounded-full border border-navy/5" />
               </div>
 
               {/* Floating cards */}
@@ -321,9 +321,11 @@ export default function DigitalHealthPage() {
                 </p>
               </div>
             </div>
-            <div className="overflow-hidden rounded-[20px] border border-navy/10 bg-white shadow-sm">
+            <div className="max-w-content mx-auto rounded-[20px] border border-navy/10  p-0 shadow-sm">
+            
               <SupademoEmbed demoId="cmo0a8tzk0fpm8v9xkn506tbn" title="Digital Health Product Demo" />
-            </div>
+              </div>
+            
           </div>
         </section>
 

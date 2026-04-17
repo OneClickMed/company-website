@@ -120,6 +120,7 @@ function ProductLogo({ src, alt }: { src: string; alt: string }) {
       alt={alt}
       width={260}
       height={48}
+      style={{ width: 'auto', height: '48px' }}
       className="h-auto max-h-12 w-auto max-w-[260px]"
     />
   )

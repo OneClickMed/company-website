@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DownloadButtons from '@/components/DownloadButtons'
+import BetaTotalCareCards from '@/components/BetaTotalCareCards'
 import { absoluteUrl, siteName } from '@/lib/seo'
 import Image from 'next/image'
 
@@ -124,67 +125,6 @@ const peopleSlides = [
   },
 ]
 
-const features = [
-  {
-    title: 'Ask AI - Your Personal Health Assistant',
-    description:
-      'A medical-grade assistant for private answers to symptoms, medication questions, and next-step guidance.',
-    icon: 'AI',
-    tone: 'bg-navy text-white md:col-span-2',
-  },
-  {
-    title: 'Digital Health Passport',
-    description:
-      'Carry your verified medical identity and records so any partnered facility can access your profile quickly.',
-    icon: 'ID',
-    tone: 'bg-ice-blue text-black',
-  },
-  {
-    title: 'Smart File Management - MediVault',
-    description:
-      'Store and organize lab results, prescriptions, and reports with secure retrieval and easy sharing.',
-    icon: 'FM',
-    tone: 'bg-beige text-black',
-  },
-  {
-    title: 'One-Tap Emergency Care',
-    description:
-      'Book an ambulance in one tap and share critical health context with responders in real time.',
-    icon: 'EC',
-    tone: 'bg-salmon-red text-white',
-  },
-  {
-    title: 'Prescription Reminders',
-    description: 'Set smart reminders to stay consistent with medications and long-term treatment plans.',
-    icon: 'RX',
-    tone: 'bg-white text-black border border-black/10',
-  },
-  {
-    title: 'Hospital Finder',
-    description:
-      'Locate verified facilities by distance and specialty when you need care quickly.',
-    icon: 'HF',
-    tone: 'bg-white text-black border border-black/10',
-  },
-  {
-    title: 'Health and Wellness Tips',
-    description: 'Receive practical daily insights tailored to your profile and care journey.',
-    icon: 'WT',
-    tone: 'bg-ice-blue text-black',
-  },
-]
-
-const featureShapeClasses = [
-  'rounded-[16px] md:rounded-tr-[64px]',
-  'rounded-[16px] md:rounded-bl-[64px]',
-  'rounded-[16px] md:rounded-tl-[52px]',
-  'rounded-[16px] md:rounded-br-[52px]',
-  'rounded-[16px] md:rounded-tl-[64px]',
-  'rounded-[16px] md:rounded-tr-[52px]',
-  'rounded-[16px] md:rounded-bl-[52px]',
-  'rounded-[16px] md:rounded-br-[64px]',
-]
-
 const steps = [
   {
     step: '01',
@@ -240,7 +180,7 @@ export default function BetaHealthPage() {
       <Header />
 
       <main className="min-h-screen bg-white pt-24">
-        <section className="px-6 pb-14 pt-12 md:px-10 md:pb-16 md:pt-16">
+        <section className="px-6 pb-14 pt-2 md:px-10 md:pb-16 md:pt-16">
           <div className="mx-auto grid max-w-content items-center gap-10 lg:grid-cols-[1fr_1fr] xl:gap-16">
             <div>
               <p className="inline-flex items-center gap-2 rounded-full bg-ice-blue px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-cobalt">
@@ -398,20 +338,18 @@ export default function BetaHealthPage() {
         {statCards.map((card, index) => (
           <article
             key={card.value}
-            className={`min-h-[260px] rounded-[28px] p-8  shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:p-10 lg:sticky ${card.className}`}
-            style={{
-              top: `calc(50vh - 150px + ${index * 18}px)`,
-            }}
+            className={`min-h-[260px] rounded-[28px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:p-10 xl:sticky xl:top-[var(--stack-top)] ${card.className}`}
+            style={{ '--stack-top': `calc(50vh - 150px + ${index * 18}px)` } as React.CSSProperties}
           >
-            <p className="font-accent text-xl leading-none ">
+            <p className="font-accent text-lg leading-none md:text-xl">
               {card.value}
             </p>
 
-            <h3 className="mt-3 max-w-[360px] text-4xl font-bold leading-[1.15] tracking-[-0.02em]">
+            <h3 className="mt-3 max-w-[360px] text-[30px] font-bold leading-[1.15] tracking-[-0.02em] md:text-4xl">
               {card.title}
             </h3>
 
-            <p className="mt-4 max-w-[460px] text-lg font-medium leading-[1.65] ">
+            <p className="mt-4 max-w-[460px] text-base font-medium leading-[1.6] md:text-lg md:leading-[1.65]">
               {card.copy}
             </p>
           </article>
@@ -431,31 +369,7 @@ export default function BetaHealthPage() {
               One Click <b className="font-accent">Total Care</b>
             </h2>
 
-            <div className="mt-10 grid gap-4 md:grid-cols-3">
-              {features.map((feature, index) => (
-                <article
-                  key={feature.title}
-                  className={`flex min-h-[250px] flex-col justify-between p-7 ${featureShapeClasses[index % featureShapeClasses.length]} ${feature.tone}`}
-                >
-                  <div>
-                    <span
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-[10px] text-xs font-bold ${feature.tone.includes('text-white')
-                          ? 'bg-white/15 text-white'
-                          : 'bg-navy/10 text-navy'
-                        }`}
-                    >
-                      {feature.icon}
-                    </span>
-                    <h3 className="mt-5 text-[22px] font-extrabold leading-[1.2]">{feature.title}</h3>
-                    <p className={`mt-3 text-sm font-medium leading-[1.65] ${feature.tone.includes('text-white') ? 'text-white/80' : 'text-black/65'}`}>
-                      {feature.description}
-                    </p>
-                  </div>
-
-
-                </article>
-              ))}
-            </div>
+            <BetaTotalCareCards />
           </div>
         </section>
 
@@ -495,7 +409,7 @@ export default function BetaHealthPage() {
 
 
 
-        <section className="px-6 pb-16 md:px-10 md:py-20">
+        <section className="px-6 pb-16 md:px-10 md:py-20 pt-8">
           <div className="relative mx-auto max-w-content overflow-hidden rounded-bl-[10px] rounded-br-[120px] rounded-tl-[120px] rounded-tr-[10px] bg-navy px-8 py-16 text-center md:px-14 md:py-20">
             <div className="pointer-events-none absolute -left-20 -top-16 h-56 w-56 rounded-full bg-cobalt/25" />
             <div className="pointer-events-none absolute -bottom-20 -right-16 h-56 w-56 rounded-full bg-salmon-red/25" />

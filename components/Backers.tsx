@@ -1,11 +1,11 @@
 import Image from "next/image";
 
 const backers = [
-  { src: 'https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/The_Founder_Institute_Logo.png', alt: 'Founder Institute' },
-  { src: 'https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/LSETF-1024x323.png', alt: 'LSETF' },
-  { src: 'https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/H2i__logo.png', alt: 'H2i' },
-  { src: 'https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/aii-logo.png', alt: 'African Impact Initiative' },
-  { src: 'https://beta.kiuloper.com/ocm/wp-content/uploads/2025/12/gcs.webp', alt: 'Google Cloud for Startups' },
+  { src: '/partners/founder-institute.png', alt: 'Founder Institute' },
+  { src: '/partners/lsetf.png', alt: 'LSETF' },
+  { src: '/partners/h2i.png', alt: 'H2i' },
+  { src: '/partners/african-impact-initiative.png', alt: 'African Impact Initiative' },
+  { src: '/partners/google-cloud-startups.png', alt: 'Google Cloud for Startups' },
 ];
 
 export default function Backers() {
@@ -25,7 +25,8 @@ export default function Backers() {
               width={120}   // required
               height={40}   // required
               quality={70}  // now valid ✅
-              className="h-10 w-auto flex-shrink-0 object-contain"
+              style={{ width: 'auto', height: '40px' }}
+              className="flex-shrink-0 object-contain"
             />
           ))}
         </div>

@@ -15,6 +15,22 @@ const patientSteps = [
   '24/7 Customer Service',
 ]
 
+function DiagonalArrowIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={`transition-transform duration-300 ${open ? 'rotate-90' : ''}`}
+    >
+      <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M9 7H17V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export default function HowToStart() {
   const [open, setOpen] = useState<'providers' | 'patients' | null>('providers')
 
@@ -60,20 +76,17 @@ export default function HowToStart() {
               <button
                 type="button"
                 onClick={() => setOpen(open === 'providers' ? null : 'providers')}
-                className="flex w-full items-center justify-between gap-4 pb-3 font-body text-[clamp(26px,3vw,34px)] leading-none text-black"
+                className="flex w-full items-center justify-between gap-4 pb-3 text-left font-body text-[clamp(22px,2.8vw,32px)] leading-none text-black"
               >
-                <span>
+                <span className="flex items-center gap-3 text-left whitespace-nowrap">
                   For <b className="font-accent italic text-black">Healthcare Providers</b>
                 </span>
-                <span
-                  className={`text-[42px] font-light leading-none transition-transform duration-300 ${open === 'providers' ? 'rotate-90' : ''}`}
-                  aria-hidden="true"
-                >
-                  ↗
+                <span className="text-[#2a5fff]">
+                  <DiagonalArrowIcon open={open === 'providers'} />
                 </span>
               </button>
               {open === 'providers' && (
-                <div className="pb-12 pt-8">
+                <div className="pb-12 pt-8 text-left">
                   <div className="flex flex-col gap-3">
                     {providerSteps.map((step, i) => (
                       <div key={step} className="flex items-center gap-3">
@@ -105,14 +118,11 @@ export default function HowToStart() {
                 onClick={() => setOpen(open === 'patients' ? null : 'patients')}
                 className="flex w-full items-center justify-between gap-4 pb-3 font-body text-[clamp(26px,3vw,34px)] leading-none text-black"
               >
-                <span>
+                <span className="flex items-center gap-3">
                   For <b className="font-accent italic text-black">Patients</b>
                 </span>
-                <span
-                  className={`text-[42px] font-light leading-none transition-transform duration-300 ${open === 'patients' ? 'rotate-90' : ''}`}
-                  aria-hidden="true"
-                >
-                  ↗
+                <span className="text-salmon-red">
+                  <DiagonalArrowIcon open={open === 'patients'} />
                 </span>
               </button>
               {open === 'patients' && (

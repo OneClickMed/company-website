@@ -10,6 +10,8 @@ const operatta = localFont({
   variable: '--font-operatta-8',
 })
 
+const disableBrowserConsole = process.env.NEXT_PUBLIC_DISABLE_BROWSER_CONSOLE !== 'false'
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -77,6 +79,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={operatta.variable}>
       <body>
+        {disableBrowserConsole ? (
+          <Script
+            id="disable-browser-console"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function () {
+                  var methods = ['log', 'info', 'warn', 'error', 'debug', 'trace'];
+                  var noop = function () {};
+                  for (var i = 0; i < methods.length; i++) {
+                    try { console[methods[i]] = noop; } catch (e) {}
+                  }
+                })();
+              `,
+            }}
+          />
+        ) : null}
         {children}
         <Script
           id="tawk-to"

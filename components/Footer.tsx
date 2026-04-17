@@ -78,7 +78,7 @@ export default function Footer() {
               alt="OneClickMed"
               width={160}
               height={40}
-              className="h-10 w-auto"
+              style={{ width: 'auto', height: '40px' }}
             />
             <p className="my-4 max-w-[300px] text-sm leading-[1.7]">
               Be the first to hear about new features, product releases, and digital health updates from OneClick-Med.

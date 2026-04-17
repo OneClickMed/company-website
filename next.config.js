@@ -3,6 +3,7 @@ const POSTHOG_PROXY_PATH = '/_ocm'
 
 const nextConfig = {
   images: {
+    qualities: [70, 75],
     remotePatterns: [
       {
         protocol: 'https',

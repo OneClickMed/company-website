@@ -9,16 +9,16 @@ export default function Header() {
   const [productsOpen, setProductsOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-navy/[0.08]">
+    <header className="sticky top-0 z-50 border-b border-navy/[0.08] bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-content items-center justify-between gap-6 px-6 md:px-10">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center" onClick={() => setMobileOpen(false)}>
           <Image
             src="/Logo.svg"
             alt="OneClickMed"
             width={160}
             height={40}
             priority
-            className="h-10 w-auto"
+            style={{ width: 'auto', height: '40px' }}
           />
         </Link>
 
@@ -52,15 +52,27 @@ export default function Header() {
           Book a Demo
         </Link>
 
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button
+          type="button"
+          className="relative z-[60] md:hidden"
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+          onClick={() => setMobileOpen((prev) => !prev)}
+        >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="var(--navy-blue)" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="md:hidden border-t border-navy/[0.08] px-5 py-4 flex flex-col gap-2 bg-white">
+      <div
+        id="mobile-nav"
+        className={`md:hidden overflow-hidden bg-white transition-[max-height,opacity] duration-300 ${
+          mobileOpen ? 'max-h-[420px] border-t border-navy/[0.08] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex flex-col gap-2 px-5 py-4">
           {[
             { label: 'Digital Health', href: '/digital-health' },
             { label: 'Beta Health', href: '/beta-health' },
@@ -72,7 +84,10 @@ export default function Header() {
               key={item.label}
               href={item.href}
               className="text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue"
-              onClick={() => posthog.capture('nav_link_clicked', { label: item.label, location: 'mobile_menu' })}
+              onClick={() => {
+                setMobileOpen(false)
+                posthog.capture('nav_link_clicked', { label: item.label, location: 'mobile_menu' })
+              }}
             >
               {item.label}
             </Link>
@@ -82,12 +97,15 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-flex justify-center items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold"
-            onClick={() => posthog.capture('book_demo_clicked', { location: 'header_mobile' })}
+            onClick={() => {
+              setMobileOpen(false)
+              posthog.capture('book_demo_clicked', { location: 'header_mobile' })
+            }}
           >
             Book a Demo
           </Link>
         </div>
-      )}
+      </div>
     </header>
   )
 }

@@ -10,7 +10,7 @@ const stats = [
     cardClass: 'rounded-[10px] rounded-br-[120px] bg-cobalt text-white md:rounded-br-[220px]',
     contentClass: 'max-w-[320px] text-left md:ml-auto md:max-w-[300px] md:text-right md:group-hover/card:max-w-[440px]',
     descClass: 'text-white/85 md:mr-auto md:max-w-[300px] md:text-left',
-    imageClass: 'bottom-0 left-5 w-[350px] max-w-none md:left-8 md:w-[400px] lg:w-[460px]',
+    imageClass: 'bottom-0 left-5 h-[58%] w-[350px] max-w-none md:left-8 md:h-[82%] md:w-[400px] lg:w-[460px]',
   },
   {
     metric: '55%',
