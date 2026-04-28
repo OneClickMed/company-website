@@ -197,9 +197,7 @@ export default function DigitalHealthPage() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/book-demo"
                   className="inline-flex items-center gap-2 rounded-[8px] bg-navy px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-px hover:bg-cobalt"
                 >
                   Book a Demo
@@ -268,14 +266,14 @@ export default function DigitalHealthPage() {
         <section className="bg-navy px-6 py-10 md:px-10">
           <div className="mx-auto max-w-content grid grid-cols-2 gap-px md:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.value} className="flex flex-col items-center gap-1 px-6 py-6 text-center">
-                <span className="font-accent text-[clamp(36px,5vw,54px)] font-extrabold leading-none text-light-yellow">
+              <div
+                key={`${s.value}-${s.label}`}
+                className="flex flex-col items-center gap-1 px-6 py-6 text-center"
+              >
+                <span className=" text-[clamp(36px,5vw,54px)] font-extrabold leading-none text-light-yellow">
                   {s.value}
                 </span>
-                {/*
-                  FIX: Bumped from text-white/60 to text-white/70 for better contrast ratio.
-                  white/60 on navy often falls below the 4.5:1 WCAG AA threshold for small text.
-                */}
+              
                 <span className="text-[13px] font-medium text-white/70">{s.label}</span>
               </div>
             ))}
@@ -388,9 +386,7 @@ export default function DigitalHealthPage() {
             </div>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/book-demo"
                 className="inline-flex items-center gap-2 rounded-[8px] bg-salmon-red px-7 py-3 text-sm font-bold text-white transition-all hover:-translate-y-px hover:bg-salmon-red/90"
               >
                 Contact Sales Team →
@@ -434,9 +430,7 @@ export default function DigitalHealthPage() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/book-demo"
                   className="inline-flex items-center rounded-[8px] bg-white px-7 py-3 text-sm font-bold text-navy transition-all hover:-translate-y-px hover:bg-ice-blue"
                 >
                   Book a Demo

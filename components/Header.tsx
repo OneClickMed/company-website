@@ -43,9 +43,7 @@ export default function Header() {
         </nav>
 
         <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/book-demo"
           className="hidden md:inline-flex items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold font-body hover:bg-salmon-red/90 hover:-translate-y-px transition-all"
           onClick={() => posthog.capture('book_demo_clicked', { location: 'header_desktop' })}
         >
@@ -93,9 +91,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/book-demo"
             className="mt-2 inline-flex justify-center items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold"
             onClick={() => {
               setMobileOpen(false)

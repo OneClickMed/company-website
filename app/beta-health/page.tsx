@@ -370,7 +370,7 @@ export default function BetaHealthPage() {
             className={`min-h-[260px] rounded-[28px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:p-10 xl:sticky xl:top-[var(--stack-top)] ${card.className}`}
             style={{ '--stack-top': `calc(50vh - 150px + ${index * 18}px)` } as React.CSSProperties}
           >
-            <p className="font-accent text-lg leading-none md:text-xl">
+            <p className=" text-lg leading-none md:text-xl">
               {card.value}
             </p>
 

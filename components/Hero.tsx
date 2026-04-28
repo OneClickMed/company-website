@@ -17,9 +17,7 @@ export default function Hero() {
       </p>
       <div className="mt-9 flex w-full max-w-[560px] flex-col items-start gap-3 md:flex-row md:justify-center">
         <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/book-demo"
           className="inline-flex min-h-[44px] items-center gap-2 rounded-[8px] bg-navy px-6 py-2 font-body text-sm font-bold text-white transition-all hover:-translate-y-px hover:bg-cobalt"
           onClick={() => posthog.capture('hero_book_demo_clicked', { location: 'hero' })}
         >

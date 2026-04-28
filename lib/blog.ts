@@ -36,6 +36,8 @@ export const filterOptions = [
   { value: 'preventive-care', label: 'Preventive Care' },
   { value: 'stress-management', label: 'Stress Management' },
   { value: 'health-tech-and-innovation', label: 'Health Tech & Innovation' },
+  { value: 'lifestyle', label: 'Lifestyle' },
+
 ]
 
 function normalizeArticle(documentData: DocumentData, id: string): BlogArticle {

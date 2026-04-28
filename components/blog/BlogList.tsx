@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react'
 import BlogCard from './BlogCard'
 import {
   fetchAllArticles,
-  filterByCategory,
   filterOptions,
   formatDate,
   stripHtml,
@@ -52,7 +51,14 @@ export default function BlogList() {
     setStatus('loading')
 
     try {
-      const data = category === 'all' ? articles : await filterByCategory(category)
+      const data =
+        category === 'all'
+          ? articles
+          : articles.filter((article) =>
+              (article.categories || []).some(
+                (item) => item.trim().toLowerCase() === category.trim().toLowerCase()
+              )
+            )
       setFilteredArticles(data)
       setStatus('idle')
     } catch {

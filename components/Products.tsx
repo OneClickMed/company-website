@@ -120,7 +120,7 @@ function ProductLogo({ src, alt }: { src: string; alt: string }) {
       alt={alt}
       width={260}
       height={48}
-      style={{ width: 'auto', height: '48px' }}
+      style={{ width: 'auto', height: '36px' }}
       className="h-auto max-h-12 w-auto max-w-[260px]"
     />
   )
@@ -182,7 +182,7 @@ export default function Products() {
   const sideCards = (
     <aside className="grid grid-cols-1 gap-5">
       <div className={`${product.tint} flex min-h-[245px] flex-col items-center justify-center rounded-[16px] rounded-tr-[150px] p-8 text-center`}>
-        <div className="font-accent text-[clamp(56px,7vw,82px)] leading-none text-black">{product.stat}</div>
+        <div className=" text-[clamp(56px,7vw,82px)] leading-none text-black">{product.stat}</div>
         <p className="mt-5 max-w-[240px] text-[16px] leading-[1.25] text-black">{product.statText}</p>
       </div>
       <div className={`${product.tint} flex min-h-[245px] items-center justify-center rounded-[16px] p-8 text-center`}>

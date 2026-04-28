@@ -100,9 +100,7 @@ Start using smarter healthcare tools today. We&apos;re here to guide you every s
                     ))}
                   </div>
                   <Link
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSdUU_yEHjrlUoo2-irKmHBtKMZlECCgFCKPWC9Ch6rdJOZNUA/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/book-demo"
                     className="mt-8 inline-flex items-center gap-2 rounded-[5px] bg-[#2a5fff] px-6 py-4 font-body text-[15px] font-bold text-white transition-all hover:-translate-y-px hover:bg-navy"
                   >
                     Contact Sales Team

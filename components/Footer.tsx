@@ -19,13 +19,16 @@ const socialLinks = [
       <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
     ),
   },
+
   {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/oneclick_med/',
-    icon: (
-      <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"/></svg>
-    ),
-  },
+  label: 'Instagram',
+  href: 'https://www.instagram.com/oneclick_med/',
+  icon: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+    </svg>
+  ),
+},
   {
     label: 'LinkedIn',
     href: 'https://ng.linkedin.com/company/oneclick-med',
@@ -44,6 +47,7 @@ const socialLinks = [
 
 export default function Footer() {
   const [email, setEmail] = useState('')
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false)
 
   const resourceLinks = [
     { label: 'Privacy Policy', href: '/privacy-policy' },
@@ -56,7 +60,7 @@ export default function Footer() {
     { label: 'Resources', href: '/resources' },
     { label: 'Digital Health', href: '/digital-health' },
     { label: 'Beta Health', href: '/beta-health' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'Book a Demo', href: '/book-demo' },
   ]
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -65,6 +69,8 @@ export default function Footer() {
       posthog.capture('newsletter_subscribed', {
         email_domain: email.split('@')[1] ?? '',
       })
+      setEmail('')
+      setNewsletterSuccess(true)
     }
   }
 
@@ -98,6 +104,11 @@ export default function Footer() {
                 Subscribe
               </button>
             </form>
+            {newsletterSuccess ? (
+              <p className="mt-3 inline-flex rounded-[6px] border border-green-300/40 bg-green-400/10 px-4 py-2 text-sm font-semibold text-green-200">
+                Success. You are subscribed.
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -174,7 +185,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row mr-16">
           <p className="text-[13px]">© 2026 OneClickMed. All Rights Reserved.</p>
           <div className="flex gap-2">
             {socialLinks.map((social) => (
