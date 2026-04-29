@@ -237,7 +237,7 @@ export default function BetaHealthPage() {
 
             <div className="relative mx-auto w-full max-w-[420px] lg:mx-0 lg:justify-self-end">
               <div className="absolute left-0 top-8 z-10 rounded-[12px] bg-white px-4 py-3 shadow-brand-menu">
-                <p className="font-accent text-2xl text-navy">78%</p>
+                <p className=" text-2xl text-navy">78%</p>
                 <p className="mt-1 max-w-[110px] text-[11px] font-semibold leading-[1.3] text-black/50">Health score this month</p>
               </div>
 
