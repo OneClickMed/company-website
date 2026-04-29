@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { defaultDescription, defaultOgImage, defaultTitle, siteName, siteUrl } from '@/lib/seo'
 import './globals.css'
 import localFont from 'next/font/local'
+import SenderFormRouteRefresh from '@/components/SenderFormRouteRefresh'
 
 const operatta = localFont({
   src: '../public/Operetta Medium/fonnts.com-operetta8-demibolditalic.otf',
@@ -96,6 +97,31 @@ export default function RootLayout({
             }}
           />
         ) : null}
+        <Script
+          id="sender-universal"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function (s, e, n, d, er) {
+                s['Sender'] = er;
+                s[er] = s[er] || function () {
+                  (s[er].q = s[er].q || []).push(arguments)
+                }, s[er].l = 1 * new Date();
+                s[er].on = function(event, callback) {
+                  s[er].listeners = s[er].listeners || {};
+                  (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
+                };
+                var a = e.createElement(n),
+                    m = e.getElementsByTagName(n)[0];
+                a.async = 1;
+                a.src = d;
+                m.parentNode.insertBefore(a, m)
+              })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+              sender('c7b842368a4574')
+            `,
+          }}
+        />
+        <SenderFormRouteRefresh />
         {children}
         <Script
           id="tawk-to"
