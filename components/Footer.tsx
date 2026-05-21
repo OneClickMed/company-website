@@ -160,7 +160,7 @@ export default function Footer() {
                 </svg>
                 <div>
                   <div className="mb-0.5 text-[11px] font-semibold text-white/80">Email</div>
-                  info@oneclickmed.com
+                  info@oneclickmed.ng
                 </div>
               </div>
             </div>
