@@ -61,10 +61,10 @@ export default function Resources() {
       {status === 'error' ? (
         <div className="mt-10 rounded-[24px] bg-blush-pink p-8 text-center">
           <h3 className="font-body text-2xl font-bold text-black">
-            We could not load resources from Firebase.
+            We could not load resources.
           </h3>
           <p className="mt-3 text-sm leading-[1.7] text-black/60">
-            Check the Firebase configuration and Firestore rules for the `blog_post` collection.
+            Please refresh the page and try again.
           </p>
         </div>
       ) : null}

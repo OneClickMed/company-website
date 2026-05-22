@@ -137,17 +137,6 @@ export default function BlogList() {
           </div>
         </div>
 
-        {!isFirebaseConfigured ? (
-          <div className="mt-10 rounded-[24px] bg-beige p-8 text-center">
-            <h2 className="font-body text-2xl font-bold text-black">
-              Firebase is not configured yet.
-            </h2>
-            <p className="mx-auto mt-3 max-w-[620px] text-sm leading-[1.7] text-black/60">
-              Add the `NEXT_PUBLIC_FIREBASE_*` environment variables to fetch and display published blog posts from Firestore.
-            </p>
-          </div>
-        ) : null}
-
         {status === 'loading' ? (
           <div className="carousel-track -mx-4 mt-10 flex gap-6 overflow-x-auto px-4 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
             {[0, 1, 2].map((item) => (
@@ -162,7 +151,7 @@ export default function BlogList() {
               We could not load the articles.
             </h2>
             <p className="mt-3 text-sm text-black/60">
-              Please refresh the page or check the Firebase configuration.
+              Please refresh the page and try again.
             </p>
           </div>
         ) : null}
@@ -210,7 +199,7 @@ export default function BlogList() {
           </div>
         ) : null}
 
-        {status === 'idle' && isFirebaseConfigured && filteredArticles.length === 0 ? (
+        {status === 'idle' && filteredArticles.length === 0 ? (
           <div className="mt-10 rounded-[24px] bg-ice-blue p-8 text-center">
             <h2 className="font-body text-2xl font-bold text-black">
               No articles found.

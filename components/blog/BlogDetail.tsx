@@ -84,7 +84,7 @@ export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
               Article not found.
             </h1>
             <p className="mt-3 text-sm text-black/60">
-              The post may be unpublished, or Firebase may not be configured yet.
+              The post may be unpublished or unavailable.
             </p>
           </div>
         ) : null}
