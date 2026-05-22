@@ -12,6 +12,7 @@ import HowToStart from '@/components/HowToStart'
 import FAQ from '@/components/FAQ'
 import CTA from '@/components/CTA'
 import Resources from '@/components/Resources'
+import Testimonials from '@/components/Testimonials'
 import Footer from '@/components/Footer'
 import { absoluteUrl, defaultDescription, siteName, siteUrl } from '@/lib/seo'
 
@@ -80,6 +81,8 @@ export default function Home() {
 
       <Products />
       <Services />
+      <Testimonials />
+
       <HowToStart />
 
       <Mission />

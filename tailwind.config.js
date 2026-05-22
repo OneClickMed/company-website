@@ -61,6 +61,15 @@ module.exports = {
         'brand-dark': '0 8px 24px rgb(var(--black-rgb) / 0.2)',
         'brand-menu': '0 8px 32px rgb(var(--navy-blue-rgb) / 0.12)',
       },
+      animation: {
+        'fade-in': 'fadeIn 0.25s ease',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+      },
       maxWidth: {
         content: '1600px',
       },
