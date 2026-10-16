@@ -106,19 +106,27 @@ export async function fetchAllArticles(): Promise<BlogArticle[]> {
 
   try {
     const articlesCollection = collection(db, 'blog_post')
-    const articlesQuery = query(
-      articlesCollection,
-      where('publish', '==', true),
-      orderBy('createdAt', 'desc')
-    )
+    // Avoid orderBy here: Firestore omits documents without createdAt from
+    // ordered results, even when they are published articles.
+    const articlesQuery = query(articlesCollection, where('publish', '==', true))
     const snapshot = await getDocs(articlesQuery)
 
-    return snapshot.docs.map((articleDoc) =>
-      normalizeArticle(articleDoc.data(), articleDoc.id)
-    )
-  } catch {
-    return []
+    return snapshot.docs
+      .map((articleDoc) => normalizeArticle(articleDoc.data(), articleDoc.id))
+      .sort((a, b) => getDateValue(b.createdAt) - getDateValue(a.createdAt))
+  } catch (error) {
+    console.error('Failed to fetch published blog articles:', error)
+    throw error
   }
+}
+
+function getDateValue(value: unknown): number {
+  if (value instanceof Date) return value.getTime()
+  if (typeof value === 'string') return new Date(value).getTime() || 0
+  if (typeof value === 'object' && value !== null && 'seconds' in value && typeof value.seconds === 'number') {
+    return value.seconds * 1000
+  }
+  return 0
 }
 
 export async function filterByCategory(category: string): Promise<BlogArticle[]> {
