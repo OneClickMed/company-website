@@ -27,7 +27,7 @@ export function captureEvent(event: string, properties?: AnalyticsEventPropertie
 export function initializeAnalytics() {
   const initialize = () => void loadPosthog()
 
-  if ('requestIdleCallback' in window) {
+  if (typeof window.requestIdleCallback === 'function') {
     window.requestIdleCallback(initialize, { timeout: 2000 })
   } else {
     window.setTimeout(initialize, 1)
