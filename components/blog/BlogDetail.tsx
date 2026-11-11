@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import posthog from 'posthog-js'
 import Image from 'next/image'
+import { captureEvent } from '@/lib/analytics'
 
 import {
   formatDate,
@@ -48,7 +48,7 @@ export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
           suggestions.filter((suggestion) => suggestion.slug !== articleData.slug)
         )
         setStatus('idle')
-        posthog.capture('blog_article_viewed', {
+        captureEvent('blog_article_viewed', {
           article_slug: articleData.slug,
           article_title: articleData.title,
           author: articleData.author ?? 'OneClickMed',

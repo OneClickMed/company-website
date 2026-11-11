@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { fetchAllArticles, formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
+import Image from 'next/image'
+import { fetchRecentArticles, formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
 
 interface ResourceCard {
   img?: string
@@ -29,8 +30,8 @@ export default function Resources() {
   useEffect(() => {
     async function loadResources() {
       try {
-        const articles = await fetchAllArticles()
-        setResources(articles.slice(0, 3).map(mapArticleToResource))
+        const articles = await fetchRecentArticles(3)
+        setResources(articles.map(mapArticleToResource))
         setStatus('idle')
       } catch {
         setStatus('error')
@@ -86,12 +87,17 @@ export default function Resources() {
             href={resource.href}
             className="block min-w-[280px] overflow-hidden rounded-[20px] bg-ice-blue transition-transform duration-300 hover:-translate-y-1 md:min-w-0"
           >
-            <div
-              className="relative h-[220px] bg-beige bg-cover bg-center"
-              style={{
-                backgroundImage: resource.img ? `url(${resource.img})` : undefined,
-              }}
-            >
+            <div className="relative h-[220px] overflow-hidden bg-beige">
+              {resource.img ? (
+                <Image
+                  src={resource.img}
+                  alt={resource.title}
+                  fill
+                  quality={70}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               {resource.date ? (
                 <span className="absolute bottom-3 left-4 text-xs text-white/80 font-medium z-10">

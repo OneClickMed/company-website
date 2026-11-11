@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import posthog from 'posthog-js'
+import { captureEvent } from '@/lib/analytics'
 
 export default function Hero() {
   return (
@@ -19,7 +19,7 @@ export default function Hero() {
         <Link
           href="/book-demo"
           className="inline-flex min-h-[44px] items-center gap-2 rounded-[8px] bg-navy px-6 py-2 font-body text-sm font-bold text-white transition-all hover:-translate-y-px hover:bg-cobalt"
-          onClick={() => posthog.capture('hero_book_demo_clicked', { location: 'hero' })}
+          onClick={() => captureEvent('hero_book_demo_clicked', { location: 'hero' })}
         >
           Book a Demo
         </Link>

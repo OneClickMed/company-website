@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 import BlogCard from './BlogCard'
 import {
   fetchAllArticles,
@@ -14,7 +15,6 @@ import Link from 'next/link'
 
 export default function BlogList() {
   const [articles, setArticles] = useState<BlogArticle[]>([])
-  const [filteredArticles, setFilteredArticles] = useState<BlogArticle[]>([])
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [status, setStatus] = useState<'loading' | 'idle' | 'error'>('loading')
@@ -29,7 +29,6 @@ export default function BlogList() {
       try {
         const data = await fetchAllArticles()
         setArticles(data)
-        setFilteredArticles(data)
         setStatus('idle')
       } catch {
         setStatus('error')
@@ -39,31 +38,35 @@ export default function BlogList() {
     loadArticles()
   }, [])
 
+  const filteredArticles = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase()
+
+    if (normalizedQuery) {
+      return articles.filter((article) =>
+        article.title.toLowerCase().includes(normalizedQuery)
+      )
+    }
+
+    if (selectedCategory === 'all') {
+      return articles
+    }
+
+    return articles.filter((article) =>
+      (article.categories || []).some(
+        (item) => item.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+      )
+    )
+  }, [articles, searchQuery, selectedCategory])
+
   const featuredArticle = selectedCategory === 'all' ? filteredArticles[0] : null
   const visibleArticles = useMemo(
     () => (featuredArticle ? filteredArticles.slice(1) : filteredArticles),
     [featuredArticle, filteredArticles]
   )
 
-  async function handleCategoryChange(category: string) {
+  function handleCategoryChange(category: string) {
     setSelectedCategory(category)
     setSearchQuery('')
-    setStatus('loading')
-
-    try {
-      const data =
-        category === 'all'
-          ? articles
-          : articles.filter((article) =>
-              (article.categories || []).some(
-                (item) => item.trim().toLowerCase() === category.trim().toLowerCase()
-              )
-            )
-      setFilteredArticles(data)
-      setStatus('idle')
-    } catch {
-      setStatus('error')
-    }
   }
 
   function handleSearch(query: string) {
@@ -71,16 +74,8 @@ export default function BlogList() {
     const normalizedQuery = query.trim().toLowerCase()
 
     if (!normalizedQuery) {
-      setFilteredArticles(articles)
       setSelectedCategory('all')
-      return
     }
-
-    setFilteredArticles(
-      articles.filter((article) =>
-        article.title.toLowerCase().includes(normalizedQuery)
-      )
-    )
   }
 
   return (
@@ -158,14 +153,18 @@ export default function BlogList() {
 
         {status === 'idle' && featuredArticle ? (
           <section className="mt-10 grid items-center gap-8 rounded-[28px] bg-navy p-5 md:grid-cols-2 md:p-8">
-            <div
-              className="min-h-[360px] rounded-[22px] bg-ice-blue bg-cover bg-center"
-              style={{
-                backgroundImage: featuredArticle.coverImage
-                  ? `url(${featuredArticle.coverImage})`
-                  : undefined,
-              }}
-            />
+            <div className="relative min-h-[360px] overflow-hidden rounded-[22px] bg-ice-blue">
+              {featuredArticle.coverImage ? (
+                <Image
+                  src={featuredArticle.coverImage}
+                  alt={featuredArticle.title}
+                  fill
+                  quality={70}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : null}
+            </div>
             <div className="py-4">
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-light-yellow">
                 Featured Post

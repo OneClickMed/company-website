@@ -40,6 +40,11 @@ export const filterOptions = [
 
 ]
 
+const ARTICLE_CACHE_TTL_MS = 5 * 60 * 1000
+let cachedArticles: BlogArticle[] | undefined
+let cachedArticlesAt = 0
+let articleFetchPromise: Promise<BlogArticle[]> | undefined
+
 function normalizeArticle(documentData: DocumentData, id: string): BlogArticle {
   return {
     id,
@@ -100,24 +105,59 @@ export function stripHtml(value = ''): string {
 }
 
 export async function fetchAllArticles(): Promise<BlogArticle[]> {
-  if (!db) {
+  const firestore = db
+  if (!firestore) {
     return []
   }
 
-  try {
-    const articlesCollection = collection(db, 'blog_post')
-    // Avoid orderBy here: Firestore omits documents without createdAt from
-    // ordered results, even when they are published articles.
-    const articlesQuery = query(articlesCollection, where('publish', '==', true))
-    const snapshot = await getDocs(articlesQuery)
-
-    return snapshot.docs
-      .map((articleDoc) => normalizeArticle(articleDoc.data(), articleDoc.id))
-      .sort((a, b) => getDateValue(b.createdAt) - getDateValue(a.createdAt))
-  } catch (error) {
-    console.error('Failed to fetch published blog articles:', error)
-    throw error
+  if (cachedArticles && Date.now() - cachedArticlesAt < ARTICLE_CACHE_TTL_MS) {
+    return cachedArticles
   }
+
+  if (!articleFetchPromise) {
+    articleFetchPromise = (async () => {
+      try {
+        const articlesCollection = collection(firestore, 'blog_post')
+        // Avoid orderBy here: Firestore omits documents without createdAt from
+        // ordered results, even when they are published articles.
+        const articlesQuery = query(articlesCollection, where('publish', '==', true))
+        const snapshot = await getDocs(articlesQuery)
+
+        cachedArticles = snapshot.docs
+          .map((articleDoc) => normalizeArticle(articleDoc.data(), articleDoc.id))
+          .sort((a, b) => getDateValue(b.createdAt) - getDateValue(a.createdAt))
+        cachedArticlesAt = Date.now()
+        return cachedArticles
+      } catch (error) {
+        console.error('Failed to fetch published blog articles:', error)
+        throw error
+      } finally {
+        articleFetchPromise = undefined
+      }
+    })()
+  }
+
+  return articleFetchPromise
+}
+
+export async function fetchRecentArticles(articleCount: number): Promise<BlogArticle[]> {
+  const firestore = db
+  if (!firestore || articleCount <= 0) {
+    return []
+  }
+
+  const articlesCollection = collection(firestore, 'blog_post')
+  const articlesQuery = query(
+    articlesCollection,
+    where('publish', '==', true),
+    orderBy('createdAt', 'desc'),
+    limit(articleCount)
+  )
+  const snapshot = await getDocs(articlesQuery)
+
+  return snapshot.docs.map((articleDoc) =>
+    normalizeArticle(articleDoc.data(), articleDoc.id)
+  )
 }
 
 function getDateValue(value: unknown): number {

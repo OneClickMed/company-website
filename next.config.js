@@ -9,6 +9,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'beta.kiuloper.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/v0/b/oneclick-med-app.appspot.com/o/**',
+      },
     ],
   },
   async rewrites() {

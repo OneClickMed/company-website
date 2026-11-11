@@ -1,6 +1,6 @@
 'use client'
 
-import posthog from 'posthog-js'
+import { captureEvent } from '@/lib/analytics'
 import type { ReactNode } from 'react'
 
 export type FAQItem = {
@@ -84,7 +84,7 @@ export default function FAQ({
               className="group rounded-[18px] bg-white px-6 py-5 shadow-sm transition-all duration-300 open:shadow-brand-menu md:px-8"
               onToggle={(e) => {
                 if ((e.currentTarget as HTMLDetailsElement).open) {
-                  posthog.capture('faq_expanded', { question: faq.question, section: sectionId })
+                  captureEvent('faq_expanded', { question: faq.question, section: sectionId })
                 }
               }}
             >

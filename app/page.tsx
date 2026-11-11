@@ -27,11 +27,13 @@ export const metadata: Metadata = {
     description: defaultDescription,
     url: '/',
     type: 'website',
+    images: [{ url: '/ocm-icon.png', width: 1122, height: 1122, alt: `${siteName} logo` }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteName} – One Click, Total care !`,
     description: defaultDescription,
+    images: ['/ocm-icon.png'],
   },
 }
 

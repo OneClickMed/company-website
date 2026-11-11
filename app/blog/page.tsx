@@ -22,11 +22,13 @@ export const metadata: Metadata = {
     description: `Read digital health insights, product updates, and care innovation stories from ${siteName}.`,
     url: '/blog',
     type: 'website',
+    images: [{ url: '/ocm-icon.png', width: 1122, height: 1122, alt: `${siteName} logo` }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteName} Blog`,
     description: `Read digital health insights, product updates, and care innovation stories from ${siteName}.`,
+    images: ['/ocm-icon.png'],
   },
 }
 

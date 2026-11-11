@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import posthog from 'posthog-js'
+import { captureEvent } from '@/lib/analytics'
 
 const socialLinks = [
   {
@@ -66,7 +66,7 @@ export default function Footer() {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (email) {
-      posthog.capture('newsletter_subscribed', {
+      captureEvent('newsletter_subscribed', {
         email_domain: email.split('@')[1] ?? '',
       })
       setEmail('')
@@ -197,7 +197,7 @@ export default function Footer() {
                 aria-label={`Visit OneClickMed on ${social.label}`}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.08] transition-all hover:border-salmon-red hover:bg-salmon-red"
                 onClick={() =>
-                  posthog.capture('social_link_clicked', { platform: social.label })
+                  captureEvent('social_link_clicked', { platform: social.label })
                 }
               >
                 <svg className="h-3.5 w-3.5 fill-white" viewBox={social.icon.props.viewBox}>

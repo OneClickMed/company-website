@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import posthog from 'posthog-js'
+import { captureEvent } from '@/lib/analytics'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -45,7 +45,7 @@ export default function Header() {
         <Link
           href="/book-demo"
           className="hidden md:inline-flex items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold font-body hover:bg-salmon-red/90 hover:-translate-y-px transition-all"
-          onClick={() => posthog.capture('book_demo_clicked', { location: 'header_desktop' })}
+          onClick={() => captureEvent('book_demo_clicked', { location: 'header_desktop' })}
         >
           Book a Demo
         </Link>
@@ -84,7 +84,7 @@ export default function Header() {
               className="text-[15px] font-medium text-black px-4 py-2 rounded-md hover:bg-ice-blue"
               onClick={() => {
                 setMobileOpen(false)
-                posthog.capture('nav_link_clicked', { label: item.label, location: 'mobile_menu' })
+                captureEvent('nav_link_clicked', { label: item.label, location: 'mobile_menu' })
               }}
             >
               {item.label}
@@ -95,7 +95,7 @@ export default function Header() {
             className="mt-2 inline-flex justify-center items-center gap-2 px-[20px] py-[6px] rounded-[6px] bg-salmon-red text-white text-sm font-semibold"
             onClick={() => {
               setMobileOpen(false)
-              posthog.capture('book_demo_clicked', { location: 'header_mobile' })
+              captureEvent('book_demo_clicked', { location: 'header_mobile' })
             }}
           >
             Book a Demo

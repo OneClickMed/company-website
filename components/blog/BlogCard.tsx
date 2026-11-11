@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import posthog from 'posthog-js'
+import Image from 'next/image'
+import { captureEvent } from '@/lib/analytics'
 import { formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
 
 interface BlogCardProps {
@@ -16,14 +17,19 @@ export default function BlogCard({ article, appview = false }: BlogCardProps) {
     <Link
       href={`/resources/${article.slug}${appview ? '?appview=true' : ''}`}
       className="group block min-w-[280px] overflow-hidden rounded-[22px] bg-ice-blue transition-transform duration-300 hover:-translate-y-1 md:min-w-0"
-      onClick={() => posthog.capture('blog_article_clicked', { article_slug: article.slug, article_title: article.title })}
+      onClick={() => captureEvent('blog_article_clicked', { article_slug: article.slug, article_title: article.title })}
     >
-      <div
-        className="relative h-[230px] bg-beige bg-cover bg-center"
-        style={{
-          backgroundImage: article.coverImage ? `url(${article.coverImage})` : undefined,
-        }}
-      >
+      <div className="relative h-[230px] overflow-hidden bg-beige">
+        {article.coverImage ? (
+          <Image
+            src={article.coverImage}
+            alt={article.title}
+            fill
+            quality={70}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
+          />
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         {article.createdAt ? (
           <span className="absolute bottom-4 left-5 z-10 text-xs font-semibold text-white/85">

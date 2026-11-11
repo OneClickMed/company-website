@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import posthog from 'posthog-js'
+import { captureEvent } from '@/lib/analytics'
 
 interface DownloadButtonsProps {
   align?: 'left' | 'center'
@@ -25,7 +25,7 @@ export default function DownloadButtons({ align = 'left', mode = 'one_link' }: D
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Download on the App Store"
-          onClick={() => posthog.capture('beta_health_download_clicked', { source: 'app_store_badge' })}
+          onClick={() => captureEvent('beta_health_download_clicked', { source: 'app_store_badge' })}
         >
           <Image
             src="/assets/img/others/appstore.png"
@@ -39,7 +39,7 @@ export default function DownloadButtons({ align = 'left', mode = 'one_link' }: D
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Get it on Google Play"
-          onClick={() => posthog.capture('beta_health_download_clicked', { source: 'play_store_badge' })}
+          onClick={() => captureEvent('beta_health_download_clicked', { source: 'play_store_badge' })}
         >
           <Image
             src="/assets/img/others/playstore.png"
@@ -64,7 +64,7 @@ export default function DownloadButtons({ align = 'left', mode = 'one_link' }: D
         rel="noopener noreferrer"
         aria-label="Download Beta Health"
         className="inline-flex min-h-[38px] items-center gap-2 rounded-[6px] bg-black px-5 py-0.5 text-sm font-bold text-white transition-transform duration-300 hover:-translate-y-1 hover:bg-black/90"
-        onClick={() => posthog.capture('beta_health_download_clicked', { source: 'one_link' })}
+        onClick={() => captureEvent('beta_health_download_clicked', { source: 'one_link' })}
       >
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 4V15M12 15L7.5 10.5M12 15L16.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
