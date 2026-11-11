@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { captureEvent } from '@/lib/analytics'
 import { formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
+import ArticleCoverImage from './ArticleCoverImage'
 
 interface BlogCardProps {
   article: BlogArticle
@@ -21,13 +21,10 @@ export default function BlogCard({ article, appview = false }: BlogCardProps) {
     >
       <div className="relative h-[230px] overflow-hidden bg-beige">
         {article.coverImage ? (
-          <Image
+          <ArticleCoverImage
             src={article.coverImage}
             alt={article.title}
-            fill
-            quality={70}
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
           />
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

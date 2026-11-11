@@ -2,83 +2,63 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { captureEvent } from '@/lib/analytics'
 
 import {
   formatDate,
-  getArticleBySlug,
   stripHtml,
   suggestArticles,
   type BlogArticle,
 } from '@/lib/blog'
-import { isFirebaseConfigured } from '@/lib/firebase'
 import BlogCard from './BlogCard'
+import ArticleCoverImage from './ArticleCoverImage'
 
 interface BlogDetailProps {
   slug: string
+  initialArticle: BlogArticle | null
   appview?: boolean
 }
 
-export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
-  const [article, setArticle] = useState<BlogArticle | null>(null)
+export default function BlogDetail({ slug, initialArticle, appview = false }: BlogDetailProps) {
+  const article = initialArticle
   const [suggestedArticles, setSuggestedArticles] = useState<BlogArticle[]>([])
-  const [status, setStatus] = useState<'loading' | 'idle' | 'error' | 'empty'>('loading')
 
   useEffect(() => {
-    async function loadArticle() {
-      if (!isFirebaseConfigured) {
-        setStatus('empty')
-        return
-      }
+    let active = true
+    setSuggestedArticles([])
 
-      try {
-        const [articleData, suggestions] = await Promise.all([
-          getArticleBySlug(slug),
-          suggestArticles(),
-        ])
-
-        if (!articleData) {
-          setStatus('empty')
-          return
-        }
-
-        setArticle(articleData)
-        setSuggestedArticles(
-          suggestions.filter((suggestion) => suggestion.slug !== articleData.slug)
-        )
-        setStatus('idle')
-        captureEvent('blog_article_viewed', {
-          article_slug: articleData.slug,
-          article_title: articleData.title,
-          author: articleData.author ?? 'OneClickMed',
-        })
-      } catch {
-        setStatus('error')
+    if (!initialArticle) {
+      return () => {
+        active = false
       }
     }
 
-    loadArticle()
-  }, [slug])
+    captureEvent('blog_article_viewed', {
+      article_slug: initialArticle.slug,
+      article_title: initialArticle.title,
+      author: initialArticle.author ?? 'OneClickMed',
+    })
+
+    // Suggestions load independently so their query cannot delay the article or cover image.
+    void suggestArticles().then((suggestions) => {
+      if (active) {
+        setSuggestedArticles(
+          suggestions.filter((suggestion) => suggestion.slug !== initialArticle.slug)
+        )
+      }
+    })
+
+    return () => {
+      active = false
+    }
+  }, [initialArticle, slug])
 
   return (
     <main className="min-h-screen bg-white px-4 py-16 md:px-10">
       <div className="mx-auto w-full max-w-content">
 
 
-        {status === 'loading' ? (
-          <div className="h-[520px] animate-pulse rounded-[28px] bg-ice-blue" />
-        ) : null}
-
-        {status === 'error' ? (
-          <div className="rounded-[24px] bg-blush-pink p-8 text-center">
-            <h1 className="font-body text-2xl font-bold text-black">
-              We could not load this article.
-            </h1>
-          </div>
-        ) : null}
-
-        {status === 'empty' ? (
+        {!article ? (
           <div className="rounded-[24px] bg-beige p-8 text-center">
             <h1 className="font-body text-2xl font-bold text-black">
               Article not found.
@@ -89,7 +69,7 @@ export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
           </div>
         ) : null}
 
-        {status === 'idle' && article ? (
+        {article ? (
           <article>
             <div className="text-left">
 
@@ -109,15 +89,14 @@ export default function BlogDetail({ slug, appview = false }: BlogDetailProps) {
 
 
             {article.coverImage ? (
-              <Image
-                src={article.coverImage}
-                alt={article.title}
-                width={1200}
-                height={700}
-                quality={70}
-                className="mt-10 h-[360px] w-full rounded-[28px] object-cover md:h-[560px]"
-                sizes="(max-width: 768px) 100vw, 1200px"
-              />
+              <div className="relative mt-10 h-[360px] overflow-hidden rounded-[28px] bg-gray-200 md:h-[560px]">
+                <ArticleCoverImage
+                  src={article.coverImage}
+                  alt={article.title}
+                  preload
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                />
+              </div>
             ) : null}
 
             <div

@@ -82,9 +82,8 @@ export default function Footer() {
             <Image
               src="/Logo White.svg"
               alt="OneClickMed"
-              width={160}
+              width={195}
               height={40}
-              style={{ width: 'auto', height: '40px' }}
             />
             <p className="my-4 max-w-[300px] text-sm leading-[1.7]">
               Be the first to hear about new features, product releases, and digital health updates from OneClick-Med.

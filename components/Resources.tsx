@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import ArticleCoverImage from './blog/ArticleCoverImage'
 import { fetchRecentArticles, formatDate, stripHtml, type BlogArticle } from '@/lib/blog'
 
 interface ResourceCard {
@@ -89,13 +89,10 @@ export default function Resources() {
           >
             <div className="relative h-[220px] overflow-hidden bg-beige">
               {resource.img ? (
-                <Image
+                <ArticleCoverImage
                   src={resource.img}
                   alt={resource.title}
-                  fill
-                  quality={70}
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
                 />
               ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

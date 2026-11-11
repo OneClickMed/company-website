@@ -3,8 +3,13 @@ type AnalyticsEventProperties = Record<string, string | number | boolean | null 
 let posthogPromise: Promise<typeof import('posthog-js').default> | undefined
 
 function loadPosthog() {
+  const token = process.env.NEXT_PUBLIC_POSTHOG_TOKEN
+  if (!token) {
+    return Promise.resolve(null)
+  }
+
   posthogPromise ??= import('posthog-js').then(({ default: posthog }) => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
+    posthog.init(token, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '/_ocm',
       ui_host: 'https://eu.posthog.com',
       defaults: '2026-01-30',
@@ -21,10 +26,14 @@ function loadPosthog() {
 }
 
 export function captureEvent(event: string, properties?: AnalyticsEventProperties) {
-  void loadPosthog().then((posthog) => posthog.capture(event, properties))
+  void loadPosthog().then((posthog) => posthog?.capture(event, properties))
 }
 
 export function initializeAnalytics() {
+  if (!process.env.NEXT_PUBLIC_POSTHOG_TOKEN) {
+    return
+  }
+
   const initialize = () => void loadPosthog()
 
   if (typeof window.requestIdleCallback === 'function') {

@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
 import BlogCard from './BlogCard'
+import ArticleCoverImage from './ArticleCoverImage'
 import {
   fetchAllArticles,
   filterOptions,
@@ -155,13 +155,10 @@ export default function BlogList() {
           <section className="mt-10 grid items-center gap-8 rounded-[28px] bg-navy p-5 md:grid-cols-2 md:p-8">
             <div className="relative min-h-[360px] overflow-hidden rounded-[22px] bg-ice-blue">
               {featuredArticle.coverImage ? (
-                <Image
+                <ArticleCoverImage
                   src={featuredArticle.coverImage}
                   alt={featuredArticle.title}
-                  fill
-                  quality={70}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
                 />
               ) : null}
             </div>

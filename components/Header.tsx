@@ -15,10 +15,9 @@ export default function Header() {
           <Image
             src="/Logo.svg"
             alt="OneClickMed"
-            width={160}
+            width={195}
             height={40}
             priority
-            style={{ width: 'auto', height: '40px' }}
           />
         </Link>
 

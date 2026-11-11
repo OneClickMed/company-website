@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import BlogDetail from '@/components/blog/BlogDetail'
-import { getArticleBySlug, stripHtml, type BlogArticle } from '@/lib/blog'
+import { stripHtml, type BlogArticle } from '@/lib/blog'
+import { getCachedArticleBySlug } from '@/lib/server-blog'
 import { absoluteUrl, defaultOgImage, siteName } from '@/lib/seo'
 
 interface ResourceDetailPageProps {
@@ -75,7 +76,7 @@ function getPublishedISO(value: unknown): string | undefined {
 
 export async function generateMetadata({ params }: ResourceDetailPageProps): Promise<Metadata> {
   const { slug } = await params
-  const article = await getArticleBySlug(slug)
+  const article = await getCachedArticleBySlug(slug)
   const canonical = `/resources/${slug}`
   const fallbackDescription = `Explore this ${siteName} resource on digital health and patient care.`
   const description = getDescription(article, fallbackDescription)
@@ -123,7 +124,7 @@ export default async function ResourceDetailPage({ params, searchParams }: Resou
   const { slug } = await params
   const { appview } = await searchParams
   const isAppView = appview === 'true'
-  const article = await getArticleBySlug(slug)
+  const article = await getCachedArticleBySlug(slug)
 
   const description = getDescription(
     article,
@@ -165,7 +166,13 @@ export default async function ResourceDetailPage({ params, searchParams }: Resou
         />
       ) : null}
       {!isAppView ? <Header /> : null}
-      <BlogDetail slug={slug} appview={isAppView} />
+      <BlogDetail
+        slug={slug}
+        initialArticle={
+          article ? { ...article, createdAt: getPublishedISO(article.createdAt) } : null
+        }
+        appview={isAppView}
+      />
       {!isAppView ? <Footer /> : null}
     </>
   )
